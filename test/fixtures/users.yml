@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+shawn:
+  name: Shawn
+  phone: 4242424242
+
+dibs:
+  name: Dibs
+  phone: 4200042000
