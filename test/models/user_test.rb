@@ -48,6 +48,11 @@ class UserTest < ActiveSupport::TestCase
     assert_equal ["Phone has already been taken"], user.errors.full_messages
   end
 
+  test "phone_verified is false by default" do
+    user = User.create!(name: 'Garr', phone: '9604884000')
+    refute user.phone_verified
+  end
+
   test "must create user if everything is okay" do
     user = User.new(name: 'Garr', phone: '9604884000')
     assert user.save
