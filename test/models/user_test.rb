@@ -53,6 +53,13 @@ class UserTest < ActiveSupport::TestCase
     refute user.phone_verified
   end
 
+  test "phone_successfully_verified! updates phone_verified to true" do
+    user = User.create!(name: 'Garr', phone: '9604884000')
+    user.phone_successfully_verified!
+    user.reload
+    assert user.phone_verified?
+  end
+
   test "must create user if everything is okay" do
     user = User.new(name: 'Garr', phone: '9604884000')
     assert user.save

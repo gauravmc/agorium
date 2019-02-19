@@ -1,0 +1,29 @@
+<% provide(:title, 'Phone Verification') %>
+
+<div>
+  Welcome to Agorium, <%= @user.name %>!
+</div>
+
+<div class="field">
+  Please enter the 6-digit OTP that we SMSed you:
+</div>
+
+<%= form_tag(user_check_otp_path(@user.id), method: :put) do %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= text_field_tag :otp %>
+  </div>
+
+  <div class="actions">
+    <%= submit_tag "Verify" %>
+  </div>
+<% end %>

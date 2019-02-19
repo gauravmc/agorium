@@ -7,4 +7,8 @@ class User < ApplicationRecord
   # creating two errors messages, which is bad UX. Wish
   # there was a better way to do this.
   validates :phone, length: { is: 10 }, if: Proc.new {|u| u.errors[:phone].none?}
+
+  def phone_successfully_verified!
+    update_attribute(:phone_verified, true)
+  end
 end
