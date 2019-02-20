@@ -21,25 +21,29 @@ class UserTest < ActiveSupport::TestCase
   test "phone must exist as a number" do
     user = User.new(name: 'Dibs')
     refute user.save
-    assert_equal ["Phone is not a number"], user.errors.full_messages
+    assert_equal ["Phone should be a 10-digit number"], user.errors.full_messages
 
     user = User.new(name: 'Dibs', phone: '')
     refute user.save
-    assert_equal ["Phone is not a number"], user.errors.full_messages
+    assert_equal ["Phone should be a 10-digit number"], user.errors.full_messages
 
     user = User.new(name: 'Dibs', phone: 'Bob')
     refute user.save
-    assert_equal ["Phone is not a number"], user.errors.full_messages
+    assert_equal ["Phone should be a 10-digit number"], user.errors.full_messages
+
+    user = User.new(name: 'Dibs', phone: '+999876767')
+    refute user.save
+    assert_equal ["Phone should be a 10-digit number"], user.errors.full_messages
   end
 
   test "phone must be 10 digits" do
     user = User.new(name: 'Dibs', phone: 123456789)
     refute user.save
-    assert_equal ["Phone is the wrong length (should be 10 characters)"], user.errors.full_messages
+    assert_equal ["Phone should be a 10-digit number"], user.errors.full_messages
 
     user = User.new(name: 'Dibs', phone: 1234567891011012)
     refute user.save
-    assert_equal ["Phone is the wrong length (should be 10 characters)"], user.errors.full_messages
+    assert_equal ["Phone should be a 10-digit number"], user.errors.full_messages
   end
 
   test "phone must be unique" do
