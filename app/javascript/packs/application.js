@@ -9,17 +9,13 @@
 
 import Rails from 'rails-ujs';
 import Turbolinks from 'turbolinks';
+import { Application } from "stimulus"
+import { definitionsFromContext } from "stimulus/webpack-helpers"
 
 Rails.start();
 Turbolinks.start();
 
-// TODO: Move this once JS components are more properly set up
-
-document.addEventListener('DOMContentLoaded', () => {
-  const navbarBurger = document.querySelector('.navbar-burger')
-  navbarBurger.addEventListener('click', () => {
-    const target = document.getElementById(navbarBurger.dataset.target);
-    navbarBurger.classList.toggle('is-active');
-    target.classList.toggle('is-active');
-  });
-});
+// Stimulus setup
+const application = Application.start()
+const context = require.context("controllers", true, /.js$/)
+application.load(definitionsFromContext(context))

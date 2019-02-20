@@ -13,20 +13,20 @@
   </head>
 
   <body>
-    <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-light" role="navigation" aria-label="main navigation" data-controller="visibility">
       <div class="navbar-brand">
         <%= link_to(root_path, class: 'navbar-item') do %>
           <%= image_tag('A_logo_small.png', alt: 'Agorium: Free, open source, & decentralized ecommerce marketplace', width: 30, height: 30) %>
         <% end %>
 
-        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-action="click->visibility#toggle" data-target="visibility.section">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
         </a>
       </div>
 
-      <div id="navbarMenu" class="navbar-menu">
+      <div class="navbar-menu" data-target="visibility.section">
         <div class="navbar-start">
           <%= link_to('Home', root_path, class: 'navbar-item') %>
           <%= link_to('About', '#', class: 'navbar-item') %>
