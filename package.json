@@ -2,11 +2,7 @@
   "name": "agorium",
   "private": true,
   "dependencies": {
-    "@rails/webpacker": "3.5",
-    "babel-preset-react": "^6.24.1",
-    "prop-types": "^15.7.2",
-    "react": "^16.8.2",
-    "react-dom": "^16.8.2"
+    "@rails/webpacker": "3.5"
   },
   "devDependencies": {
     "webpack-dev-server": "2.11.2"
