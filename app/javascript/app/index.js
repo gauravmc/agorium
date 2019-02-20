@@ -22,9 +22,21 @@ App.propTypes = {
   name: PropTypes.string
 }
 
+// Do not render anything from React for now
+
+// document.addEventListener('DOMContentLoaded', () => {
+//   ReactDOM.render(
+//     <App name="<User Name>" />,
+//     document.body.appendChild(document.createElement('div')),
+//   )
+// })
+
+// TODO: Move this once React components are more properly set up
 document.addEventListener('DOMContentLoaded', () => {
-  ReactDOM.render(
-    <App name="<User Name>" />,
-    document.body.appendChild(document.createElement('div')),
-  )
-})
+  const navbarBurger = document.querySelector('.navbar-burger')
+  navbarBurger.addEventListener('click', () => {
+    const target = document.getElementById(navbarBurger.dataset.target);
+    navbarBurger.classList.toggle('is-active');
+    target.classList.toggle('is-active');
+  });
+});

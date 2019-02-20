@@ -7,11 +7,51 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= javascript_pack_tag 'app', defer: true %>
-    <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_pack_tag 'app', defer: true %>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
   </head>
 
   <body>
-    <%= yield %>
+    <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <%= link_to(root_path, class: 'navbar-item') do %>
+          <%= image_tag('A_logo_small.png', alt: 'Agorium: Free, open source, & decentralized ecommerce marketplace', width: 30, height: 30) %>
+        <% end %>
+
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navbarMenu" class="navbar-menu">
+        <div class="navbar-start">
+          <%= link_to('Home', root_path, class: 'navbar-item') %>
+          <%= link_to('About', '#', class: 'navbar-item') %>
+          <div class="navbar-item has-dropdown is-hoverable">
+            <%= link_to('More', '#', class: 'navbar-link') %>
+            <div class="navbar-dropdown">
+              <%= link_to('Jobs', '#', class: 'navbar-item') %>
+              <%= link_to('Contact', '#', class: 'navbar-item') %>
+            </div>
+          </div>
+        <div>
+      </div>
+    </nav>
+    <section class="section">
+      <%= yield %>
+    </section>
+
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <p>
+          <strong>Agorium</strong> is a decentralized, zero-commission, no-fee marketplace, just like the <i>Agoras</i> of the ancient Greek city-states. We're building this platform specifically for small sellers in India to bring their businesses online.
+        </p>
+        <p>
+          The source code of Agorium will be licensed <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content will get licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+        </p>
+      </div>
+    </footer>
   </body>
 </html>
