@@ -5,7 +5,13 @@ import PropTypes from 'prop-types'
 console.log('App Pack')
 
 const App = props => (
-  <div>Welcome to Agorium, {props.name}!</div>
+  <section className="section">
+    <div className="container">
+      <p className="subtitle">
+        Welcome to Agorium, {props.name}! This message is coming from React.
+      </p>
+    </div>
+  </section>
 )
 
 App.defaultProps = {
