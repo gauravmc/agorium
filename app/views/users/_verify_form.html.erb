@@ -1,0 +1,17 @@
+<%= form_with(url: user_check_otp_path(@user.id), method: :put) do |f| %>
+  <div class="field">
+    <label class="label">Please enter the 6-digit OTP that we SMSed you:</label>
+    <div class="control">
+      <%= f.text_field :otp, class: "input is-medium #{'is-danger' if @user.errors.any?}", placeholder: '6-digit OTP' %>
+    </div>
+    <% if @user.errors.any? %>
+      <% @user.errors[:base].each do |message| %>
+        <p class="help is-danger"><%= message %></p>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Verify mobile number', class: 'button is-primary is-medium is-fullwidth', data: { "disable-with": "Checking..." } %>
+  </div>
+<% end %>

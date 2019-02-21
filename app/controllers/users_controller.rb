@@ -32,6 +32,7 @@ class UsersController < ApplicationController
       else
         @user.errors.add(:base, 'OTP did not match, please try entering again.')
         format.html { render :verify }
+        format.js { render :check_otp, status: :unprocessable_entity }
       end
     end
   end
