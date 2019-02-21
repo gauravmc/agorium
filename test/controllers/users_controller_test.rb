@@ -16,6 +16,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
       post users_url, params: { user: { name: 'Dibs', phone: 'invalid' } }
     end
 
+    assert_response :unprocessable_entity
     assert_match "Phone should be a 10-digit number", @response.body
   end
 

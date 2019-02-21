@@ -8,38 +8,7 @@
         <p class="subtitle is-4 has-text-grey-light">Let's face it – taking a retail business online is hard. Selling products on large online marketplaces is complex, costly, and disconnects you from your own customers. The good news? Agorium solves all of this, and more. </p>
       </div>
       <div class="column">
-        <%= form_for(@user, url: signup_path) do |f| %>
-          <div class="field">
-            <div class="control">
-              <%= f.text_field :name, class: "input is-medium #{'is-danger' if @user.errors[:name].any?}", placeholder: 'Your name' %>
-            </div>
-            <% if @user.errors[:name].any? %>
-              <% @user.errors[:name].each do |message| %>
-                <p class="help is-danger">Name <%= message %></p>
-              <% end %>
-            <% end %>
-          </div>
-
-          <div class="field is-expanded">
-            <div class="field has-addons">
-              <div class="control">
-                <a class="button is-static is-medium">+91</a>
-              </div>
-              <div class="control is-expanded">
-                <%= f.phone_field :phone, class: "input is-medium #{'is-danger' if @user.errors[:phone].any?}", placeholder: 'Your mobile number' %>
-              </div>
-            </div>
-            <% if @user.errors[:phone].any? %>
-              <% @user.errors[:phone].each do |message| %>
-                <p class="help is-danger">Phone <%= message %></p>
-              <% end %>
-            <% end %>
-          </div>
-
-          <div class="actions">
-            <%= f.submit 'Create my account', class: 'button is-primary is-medium is-fullwidth', data: { "disable-with": "Creating account..." } %>
-          </div>
-        <% end %>
+        <%= render 'form' %>
       </div>
     </div>
   </div>
