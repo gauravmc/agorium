@@ -6,7 +6,7 @@
     <%= form_for(@user, url: signup_path) do |f| %>
       <div class="field">
         <div class="control">
-          <%= f.text_field :name, class: "input is-medium #{'is-danger' if @user.errors[:name].any?}", placeholder: 'Name' %>
+          <%= f.text_field :name, class: "input is-medium #{'is-danger' if @user.errors[:name].any?}", placeholder: 'Your name' %>
         </div>
         <% if @user.errors[:name].any? %>
           <% @user.errors[:name].each do |message| %>
@@ -15,9 +15,14 @@
         <% end %>
       </div>
 
-      <div class="field">
-        <div class="control">
-          <%= f.phone_field :phone, class: "input is-medium #{'is-danger' if @user.errors[:phone].any?}", placeholder: 'Phone' %>
+      <div class="field is-expanded">
+        <div class="field has-addons">
+          <div class="control">
+            <a class="button is-static is-medium">+91</a>
+          </div>
+          <div class="control is-expanded">
+            <%= f.phone_field :phone, class: "input is-medium #{'is-danger' if @user.errors[:phone].any?}", placeholder: 'Your mobile number' %>
+          </div>
         </div>
         <% if @user.errors[:phone].any? %>
           <% @user.errors[:phone].each do |message| %>
