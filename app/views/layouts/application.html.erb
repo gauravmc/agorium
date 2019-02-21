@@ -17,6 +17,7 @@
       <div class="navbar-brand">
         <%= link_to(root_path, class: 'navbar-item') do %>
           <%= image_tag('A_logo_tiny.png', alt: 'Agorium: Free, open source, & decentralized ecommerce marketplace', width: 28, height: 28) %>
+          <%= image_tag('agorium_small.png', width: 110, style: 'margin-left: 5px !important') %>
         <% end %>
 
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-action="click->visibility#toggle" data-target="visibility.section">
@@ -28,11 +29,11 @@
 
       <div class="navbar-menu" data-target="visibility.section">
         <div class="navbar-start">
-          <%= link_to('Home', root_path, class: 'navbar-item') %>
-          <%= link_to('About', '#', class: 'navbar-item') %>
+          <%= link_to('How it works', '#', class: 'navbar-item') %>
           <div class="navbar-item has-dropdown is-hoverable">
             <%= link_to('More', '#', class: 'navbar-link') %>
             <div class="navbar-dropdown">
+              <%= link_to('About', '#', class: 'navbar-item') %>
               <%= link_to('Jobs', '#', class: 'navbar-item') %>
               <%= link_to('Contact', '#', class: 'navbar-item') %>
             </div>
@@ -61,6 +62,7 @@
         <p>
           The source code of Agorium will be licensed <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content will get licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
         </p>
+        <p>© 2019-2020</p>
       </div>
     </footer>
   </body>
