@@ -1,0 +1,16 @@
+<div class="content">
+  <h3 class="title">Log in to Agorium</h3>
+  <p class="subtitle">Access your seller admin</p>
+</div>
+<%= form_with(url: 'something', method: :put) do |f| %>
+  <div class="field">
+    <div class="control">
+      <%= f.text_field :phone, class: "input is-medium", placeholder: 'Your mobile number' %>
+    </div>
+    <p class="help">Enter the number that you <u><%= link_to 'registered', signup_path %></u> with us</p>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Log in with OTP', class: 'button is-primary is-medium is-fullwidth', data: { "disable-with": "Sending OTP..." } %>
+  </div>
+<% end %>
