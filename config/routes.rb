@@ -3,14 +3,13 @@ Rails.application.routes.draw do
   root 'home#index'
 
   get  '/signup', to: 'users#new'
-  post  '/signup', to: 'users#create'
+  post '/signup', to: 'users#create'
 
   get    '/login', to: 'sessions#new'
   post   '/login', to: 'sessions#create'
-  delete '/logout', to: 'sessions#destroy'
 
   resources :users, only: [:new, :create] do
-    get :verify, to: 'users#verify'
-    put :check_otp, to: 'users#check_otp'
+    get :verify
+    put :check_otp
   end
 end

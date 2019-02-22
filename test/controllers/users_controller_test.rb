@@ -26,6 +26,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_response :unprocessable_entity
+    assert_equal "text/javascript", @response.content_type
     assert_match "Phone should be a 10-digit number", @response.body
   end
 
@@ -43,6 +44,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_response :success
+    assert_equal "text/javascript", @response.content_type
     assert_match "Turbolinks.visit", @response.body
     assert_match user_verify_path(User.last.id), @response.body
   end
@@ -67,6 +69,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     put user_check_otp_url(new_user.id), params: { otp: 'invalid' }, xhr: true
 
     assert_response :unprocessable_entity
+    assert_equal "text/javascript", @response.content_type
     assert_match "OTP did not match, please try entering again", @response.body
   end
 
@@ -83,6 +86,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     put user_check_otp_url(new_user.id), params: { otp: '420042' }, xhr: true
 
     assert new_user.reload.phone_verified?
+    assert_equal "text/javascript", @response.content_type
     assert_match "Turbolinks.visit", @response.body
     assert_match root_path, @response.body
   end

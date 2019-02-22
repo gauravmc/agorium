@@ -1,0 +1,18 @@
+<%= form_with(model: @session_form, scope: :session, url: login_path) do |f| %>
+  <div class="field">
+    <div class="control">
+      <%= f.phone_field :phone, class: "input is-medium #{'is-danger' if @session_form.errors.any?}", placeholder: 'Your mobile number' %>
+    </div>
+    <% if @session_form.errors.any? %>
+      <% @session_form.errors.full_messages.each do |message| %>
+        <p class="help is-danger"><%= message %></p>
+      <% end %>
+    <% else %>
+      <p class="help">Enter the number that you <u><%= link_to 'registered', signup_path %></u> with us</p>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Log in with OTP', class: 'button is-primary is-medium is-fullwidth', data: { "disable-with": "Sending OTP..." } %>
+  </div>
+<% end %>
