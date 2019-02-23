@@ -78,18 +78,6 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_match root_path, @response.body
   end
 
-  test "does not touch user record if phone was already verified" do
-    user = users(:dibs)
-    updated_at = user.updated_at
-
-    post check_otp_url(user.id), params: { otp: '420042' }, xhr: true
-
-    assert_equal updated_at, user.reload.updated_at
-    assert_equal "text/javascript", @response.content_type
-    assert is_logged_in?
-    assert_match root_path, @response.body
-  end
-
   test "destroy logs out the user by deleteing from session" do
     post check_otp_url(users(:dibs).id), params: { otp: '420042' }
     assert is_logged_in?

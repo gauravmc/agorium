@@ -64,6 +64,25 @@ class UserTest < ActiveSupport::TestCase
     assert user.phone_verified?
   end
 
+  test "remember updates the remember_digest with an encrypted token" do
+    user = User.create!(name: 'Garr', phone: '9604884000')
+    user.remember
+    assert user.remember_digest.present?
+  end
+
+  test "forget sets remember_digest to nil" do
+    user = users(:dibs)
+    user.update_attribute(:remember_digest, User.digest(42))
+    user.forget
+    refute user.remember_digest.present?
+  end
+
+  test "authenticated? should return false for a user with nil digest" do
+    user = users(:dibs)
+    user.update_attribute(:remember_digest, nil)
+    refute user.authenticated?('')
+  end
+
   test "must create user if everything is okay" do
     user = User.new(name: 'Garr', phone: '9604884000')
     assert user.save
