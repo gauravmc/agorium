@@ -30,6 +30,7 @@ class SessionsController < ApplicationController
     respond_to do |format|
       if params[:otp] == TEMP_PLACEHOLDER_OTP.to_s # TODO: Add real OTP check
         @user.phone_successfully_verified! unless @user.phone_verified?
+        log_in @user
         format.html { redirect_to root_path }
       else
         @error_message = 'We couldn’t match that one. Want to try again?'
@@ -37,6 +38,11 @@ class SessionsController < ApplicationController
         format.js { render :check, status: :unprocessable_entity }
       end
     end
+  end
+
+  def destroy
+    log_out
+    redirect_to root_path
   end
 
   private

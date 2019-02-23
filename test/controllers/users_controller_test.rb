@@ -45,7 +45,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_equal "text/javascript", @response.content_type
-    assert_match "Turbolinks.visit", @response.body
     assert_match verify_with_otp_path(User.last.id), @response.body
   end
 end

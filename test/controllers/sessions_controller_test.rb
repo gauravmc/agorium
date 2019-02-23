@@ -45,6 +45,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     new_user = User.create!(name: 'Garr', phone: '9604884000')
     post check_otp_url(new_user.id), params: { otp: 'invalid' }
 
+    refute is_logged_in?
     assert_match "We couldn’t match that one. Want to try again?", @response.body
   end
 
@@ -54,6 +55,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :unprocessable_entity
     assert_equal "text/javascript", @response.content_type
+    refute is_logged_in?
     assert_match "We couldn’t match that one. Want to try again?", @response.body
   end
 
@@ -62,6 +64,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     post check_otp_url(new_user.id), params: { otp: '420042' }
 
     assert new_user.reload.phone_verified?
+    assert is_logged_in?
     assert_redirected_to root_path
   end
 
@@ -71,7 +74,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
 
     assert new_user.reload.phone_verified?
     assert_equal "text/javascript", @response.content_type
-    assert_match "Turbolinks.visit", @response.body
+    assert is_logged_in?
     assert_match root_path, @response.body
   end
 
@@ -83,7 +86,16 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
 
     assert_equal updated_at, user.reload.updated_at
     assert_equal "text/javascript", @response.content_type
-    assert_match "Turbolinks.visit", @response.body
+    assert is_logged_in?
     assert_match root_path, @response.body
+  end
+
+  test "destroy logs out the user by deleteing from session" do
+    post check_otp_url(users(:dibs).id), params: { otp: '420042' }
+    assert is_logged_in?
+
+    delete logout_path
+    refute is_logged_in?
+    assert_redirected_to root_path
   end
 end

@@ -45,7 +45,11 @@
               <%= link_to(signup_path, class: 'button is-primary') do %>
                 <strong>Sign up</strong>
               <% end %>
-              <%= link_to('Log in', login_path, class: 'button') %>
+              <% if logged_in? %>
+                <%= link_to('Log out', logout_path, class: 'button', method: :delete) %>
+              <% else %>
+                <%= link_to('Log in', login_path, class: 'button') %>
+              <% end %>
             </div>
           </div>
         </div>
