@@ -21,5 +21,7 @@ module Agorium
       g.stylesheets false
       g.javascripts false
     end
+
+    config.eager_load_paths << Rails.root.join('lib')
   end
 end

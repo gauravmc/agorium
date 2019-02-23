@@ -33,6 +33,19 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_match "We couldn’t find an account with that number", @response.body
   end
 
+  test "create logs in the user and starts phone verification" do
+    user = users(:shawn)
+    stub_request(:post, /api.authy.com/).
+      with(query: hash_including({ phone_number: user.phone })).
+      to_return(status: 200)
+
+    post login_url, params: { session: { phone: user.phone } }, xhr: true
+
+    assert_response :success
+    assert_equal "text/javascript", @response.content_type
+    assert_match verify_with_otp_url(user.id), @response.body
+  end
+
   test "verify renders otp entering page" do
     new_user = User.create!(name: 'Garr', phone: '9604884000')
 
@@ -43,6 +56,13 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
 
   test "should render errors when otp cannot be verified" do
     new_user = User.create!(name: 'Garr', phone: '9604884000')
+    stub_request(:get, /api.authy.com/).
+      with(query: hash_including({
+        phone_number: new_user.phone,
+        verification_code: 'invalid'
+      })).
+      to_return(status: 400)
+
     post check_otp_url(new_user.id), params: { otp: 'invalid' }
 
     refute is_logged_in?
@@ -51,6 +71,13 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
 
   test "xhr request should render errors when otp cannot be verified" do
     new_user = User.create!(name: 'Garr', phone: '9604884000')
+    stub_request(:get, /api.authy.com/).
+      with(query: hash_including({
+        phone_number: new_user.phone,
+        verification_code: 'invalid'
+      })).
+      to_return(status: 400)
+
     post check_otp_url(new_user.id), params: { otp: 'invalid' }, xhr: true
 
     assert_response :unprocessable_entity
@@ -61,6 +88,13 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
 
   test "should update user phone_verified and redirect to home once otp is good" do
     new_user = User.create!(name: 'Garr', phone: '9604884000')
+    stub_request(:get, /api.authy.com/).
+      with(query: hash_including({
+        phone_number: new_user.phone,
+        verification_code: '420042'
+      })).
+      to_return(status: 200)
+
     post check_otp_url(new_user.id), params: { otp: '420042' }
 
     assert new_user.reload.phone_verified?
@@ -70,6 +104,13 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
 
   test "xhr request should update user phone_verified once otp is good" do
     new_user = User.create!(name: 'Garr', phone: '9604884000')
+    stub_request(:get, /api.authy.com/).
+      with(query: hash_including({
+        phone_number: new_user.phone,
+        verification_code: '420042'
+      })).
+      to_return(status: 200)
+
     post check_otp_url(new_user.id), params: { otp: '420042' }, xhr: true
 
     assert new_user.reload.phone_verified?
@@ -79,6 +120,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "destroy logs out the user by deleteing from session" do
+    stub_request(:get, /api.authy.com/).to_return(status: 200)
     post check_otp_url(users(:dibs).id), params: { otp: '420042' }
     assert is_logged_in?
 

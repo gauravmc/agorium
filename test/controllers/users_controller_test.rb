@@ -31,6 +31,10 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should redirect to phone verification page once user is created" do
+    stub_request(:post, /api.authy.com/).
+      with(query: hash_including({ phone_number: '9800098000' })).
+      to_return(status: 200)
+
     assert_difference('User.count') do
       post users_url, params: { user: { name: 'Dibs', phone: '9800098000' } }
     end
@@ -39,6 +43,10 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "xhr request to create action responds correctly when user is created" do
+    stub_request(:post, /api.authy.com/).
+      with(query: hash_including({ phone_number: '9800098000' })).
+      to_return(status: 200)
+
     assert_difference('User.count') do
       post users_url, params: { user: { name: 'Dibs', phone: '9800098000' } }, xhr: true
     end

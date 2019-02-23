@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
     @session_form = SessionForm.new(phone: params[:session][:phone])
     respond_to do |format|
       if @session_form.valid?
-        # TODO: Trigger real OTP message
+        Twilio::PhoneVerification.start(@session_form.user.phone)
         format.html { redirect_to action: :verify, user_id: @session_form.user }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -26,9 +26,10 @@ class SessionsController < ApplicationController
 
   def check_otp
     @user = User.find(params[:user_id])
+    resp = Twilio::PhoneVerification.check(params[:otp], @user.phone)
 
     respond_to do |format|
-      if params[:otp] == TEMP_PLACEHOLDER_OTP.to_s # TODO: Add real OTP check
+      if resp.code == 200
         @user.phone_successfully_verified! unless @user.phone_verified?
         log_in @user
         format.html { redirect_to root_path }

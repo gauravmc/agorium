@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        # TODO: Trigger real OTP message
+        Twilio::PhoneVerification.start(@user.phone)
         format.html { redirect_to verify_with_otp_path(@user) }
       else
         format.html { render :new, status: :unprocessable_entity }
