@@ -5,11 +5,10 @@ Rails.application.routes.draw do
   get  '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
 
-  get    '/login', to: 'sessions#new'
-  post   '/login', to: 'sessions#create'
+  get  '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+  get  '/verify/:user_id', to: 'sessions#verify', as: :verify_with_otp
+  post '/check_otp/:user_id', to: 'sessions#check_otp', as: :check_otp
 
-  resources :users, only: [:new, :create] do
-    get :verify
-    put :check_otp
-  end
+  resources :users, only: [:new, :create]
 end

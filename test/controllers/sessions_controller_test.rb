@@ -32,4 +32,58 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "text/javascript", @response.content_type
     assert_match "We couldn’t find an account with that number", @response.body
   end
+
+  test "verify renders otp entering page" do
+    new_user = User.create!(name: 'Garr', phone: '9604884000')
+
+    get verify_with_otp_url(new_user.id)
+    assert_response :success
+    assert_match "Enter the OTP number that we messaged you", @response.body
+  end
+
+  test "should render errors when otp cannot be verified" do
+    new_user = User.create!(name: 'Garr', phone: '9604884000')
+    post check_otp_url(new_user.id), params: { otp: 'invalid' }
+
+    assert_match "We couldn’t match that one. Want to try again?", @response.body
+  end
+
+  test "xhr request should render errors when otp cannot be verified" do
+    new_user = User.create!(name: 'Garr', phone: '9604884000')
+    post check_otp_url(new_user.id), params: { otp: 'invalid' }, xhr: true
+
+    assert_response :unprocessable_entity
+    assert_equal "text/javascript", @response.content_type
+    assert_match "We couldn’t match that one. Want to try again?", @response.body
+  end
+
+  test "should update user phone_verified and redirect to home once otp is good" do
+    new_user = User.create!(name: 'Garr', phone: '9604884000')
+    post check_otp_url(new_user.id), params: { otp: '420042' }
+
+    assert new_user.reload.phone_verified?
+    assert_redirected_to root_path
+  end
+
+  test "xhr request should update user phone_verified once otp is good" do
+    new_user = User.create!(name: 'Garr', phone: '9604884000')
+    post check_otp_url(new_user.id), params: { otp: '420042' }, xhr: true
+
+    assert new_user.reload.phone_verified?
+    assert_equal "text/javascript", @response.content_type
+    assert_match "Turbolinks.visit", @response.body
+    assert_match root_path, @response.body
+  end
+
+  test "does not touch user record if phone was already verified" do
+    user = users(:dibs)
+    updated_at = user.updated_at
+
+    post check_otp_url(user.id), params: { otp: '420042' }, xhr: true
+
+    assert_equal updated_at, user.reload.updated_at
+    assert_equal "text/javascript", @response.content_type
+    assert_match "Turbolinks.visit", @response.body
+    assert_match root_path, @response.body
+  end
 end

@@ -35,7 +35,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
       post users_url, params: { user: { name: 'Dibs', phone: '9800098000' } }
     end
 
-    assert_redirected_to user_verify_path(User.last.id)
+    assert_redirected_to verify_with_otp_path(User.last.id)
   end
 
   test "xhr request to create action responds correctly when user is created" do
@@ -46,48 +46,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_equal "text/javascript", @response.content_type
     assert_match "Turbolinks.visit", @response.body
-    assert_match user_verify_path(User.last.id), @response.body
-  end
-
-  test "verify renders otp entering page" do
-    new_user = User.create!(name: 'Garr', phone: '9604884000')
-
-    get user_verify_url(new_user.id)
-    assert_response :success
-    assert_match "Please enter the 6-digit OTP", @response.body
-  end
-
-  test "should render errors when otp cannot be verified" do
-    new_user = User.create!(name: 'Garr', phone: '9604884000')
-    put user_check_otp_url(new_user.id), params: { otp: 'invalid' }
-
-    assert_match "OTP did not match, please try entering again", @response.body
-  end
-
-  test "xhr request should render errors when otp cannot be verified" do
-    new_user = User.create!(name: 'Garr', phone: '9604884000')
-    put user_check_otp_url(new_user.id), params: { otp: 'invalid' }, xhr: true
-
-    assert_response :unprocessable_entity
-    assert_equal "text/javascript", @response.content_type
-    assert_match "OTP did not match, please try entering again", @response.body
-  end
-
-  test "should update user record and redirect to home once otp is good" do
-    new_user = User.create!(name: 'Garr', phone: '9604884000')
-    put user_check_otp_url(new_user.id), params: { otp: '420042' }
-
-    assert new_user.reload.phone_verified?
-    assert_redirected_to root_path
-  end
-
-  test "xhr request should update user record and redirect to home once otp is good" do
-    new_user = User.create!(name: 'Garr', phone: '9604884000')
-    put user_check_otp_url(new_user.id), params: { otp: '420042' }, xhr: true
-
-    assert new_user.reload.phone_verified?
-    assert_equal "text/javascript", @response.content_type
-    assert_match "Turbolinks.visit", @response.body
-    assert_match root_path, @response.body
+    assert_match verify_with_otp_path(User.last.id), @response.body
   end
 end

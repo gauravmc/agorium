@@ -1,0 +1,16 @@
+<%= form_with(url: check_otp_path(@user.id)) do |f| %>
+  <div class="field">
+    <div class="control">
+      <%= f.phone_field :otp, class: "input is-medium #{'is-danger' if @error_message.present?}", placeholder: '6-digit OTP' %>
+    </div>
+    <% if @error_message.present? %>
+      <p class="help is-danger"><%= @error_message %></p>
+    <% else %>
+      <p class="help">Enter the OTP number that we messaged you</p>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Verify', class: 'button is-primary is-medium is-fullwidth', data: { "disable-with": "Verifying..." } %>
+  </div>
+<% end %>

@@ -3,7 +3,9 @@
 shawn:
   name: Shawn
   phone: 4242424242
+  phone_verified: true
 
 dibs:
   name: Dibs
   phone: 4200042000
+  phone_verified: true
