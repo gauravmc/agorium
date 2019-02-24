@@ -1,59 +1,33 @@
 <section class="section">
-  <div class="container">
-    <h1 class="title">
-      Yay, you're in!
-    </h1>
-    <p class="subtitle">
-      As you can see, this page is work-in-progress right now. This is where all the awesome products of our merchants will start getting displayed (in a few weeks). We want to make this the most well-designed online product purchase experience ever. Below is a sample template of how we might render product images.
+  <div class="container content">
+    <p class="title is-2">
+      A home for the retail merchants of India
+    </p>
+    <p class="subtitle is-4 has-text-grey">
+    Agorium is a decentralized, zero-commission, no-fee marketplace designed for small retailers in India. Traditional ecommerce marketplaces today gobble up most of the value they create – in the form of margins, customer relationship, and data – making small sellers 'second-class citizens' in the process. It really doesn't have to be this way. Agorium is focused on flipping this model over its head. We've managed to design an open platform model that provides most of the value to the retailers themselves, and we're currently working hard on building it well. We're calling it Agorium because this concept is built upon the core value of <i><%= link_to 'Agora markets', 'https://en.wikipedia.org/wiki/Agora' %></i> of the ancient Greek city-states, viz. giving the power to sell freely to the small businesses. <%= link_to 'Sign up', signup_path, class: 'has-text-primary' %> to become an early user.
     </p>
   </div>
 </section>
 
-<section class="section">
+<section class="section is-medium has-background-grey">
   <div class="container">
-    <div class="tile is-ancestor">
-      <div class="tile is-vertical is-8">
-        <div class="tile">
-          <div class="tile is-parent is-vertical">
-            <article class="tile is-child notification is-primary">
-              <p class="title">Vertical product...</p>
-              <p class="subtitle">Top tile</p>
-            </article>
-            <article class="tile is-child notification is-warning">
-              <p class="title">...Botton product</p>
-              <p class="subtitle">Bottom tile</p>
-            </article>
-          </div>
-          <div class="tile is-parent">
-            <article class="tile is-child notification is-info">
-              <p class="title">Middle product</p>
-              <p class="subtitle">With a nice image</p>
-              <figure class="image is-4by3">
-                <img src="https://bulma.io/images/placeholders/640x480.png">
-              </figure>
-            </article>
-          </div>
-        </div>
-        <div class="tile is-parent">
-          <article class="tile is-child notification is-danger">
-            <p class="title">Wide-looking product</p>
-            <p class="subtitle">Aligned with the right tile</p>
-            <div class="content">
-              Cupcake chupa chups macaroon. Tootsie roll muffin chocolate cake lemon drops pastry. Pastry jelly beans jelly cotton candy wafer icing toffee cotton candy. Muffin brownie lollipop sweet I love.
-            </div>
-          </article>
-        </div>
+    <div class="columns is-vcentered">
+      <div class="column">
+        <p class="title has-text-white-ter">Stay up to date</p>
+        <p class="subtitle is-4 has-text-white-ter">Interested in how this program fares? Enter your email to receive our updates.</p>
       </div>
-      <div class="tile is-parent">
-        <article class="tile is-child notification is-success">
-          <div class="content">
-            <p class="title">Tall-looking product</p>
-            <p class="subtitle">With some content...</p>
-            <div class="content">
-              Apple pie I love brownie dessert I love cheesecake tiramisu. Carrot cake sweet I love ice cream donut chocolate cake. Tiramisu wafer apple pie ice cream I love tiramisu. Pastry I love dragée muffin lollipop topping danish cake.
-            </div>
+
+      <div class="column">
+        <%= form_with(url: nil) do |f| %>
+          <div class="field is-grouped">
+            <p class="control is-expanded">
+              <%= f.email_field :email, class: 'input is-medium', placeholder: 'Email address', disabled: 'disabled' %>
+            </p>
+            <p class="control">
+              <%= f.submit 'Subscribe', class: 'button is-info is-medium', disabled: 'disabled'  %>
+            </p>
           </div>
-        </article>
+        <% end%>
       </div>
     </div>
   </div>
