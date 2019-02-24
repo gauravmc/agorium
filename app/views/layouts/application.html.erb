@@ -18,7 +18,7 @@
       <div class="navbar-brand">
         <%= link_to(root_path, class: 'navbar-item') do %>
           <%= image_tag('A_logo_tiny.png', alt: 'Agorium: Free, open source, & decentralized ecommerce marketplace', width: 28, height: 28) %>
-          <%= image_tag('agorium_small.png', width: 110, style: 'margin-left: 5px !important') %>
+          <%= image_tag('agorium_black_small.png', width: 110, style: 'margin-left: 5px !important') %>
         <% end %>
 
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-action="click->visibility#toggle" data-target="visibility.section">
@@ -33,11 +33,15 @@
           <%= link_to('How it works', '#', class: 'navbar-item') %>
           <%= link_to('Blog', '#', class: 'navbar-item') %>
           <%= mail_to('gaurav@agorium.io', 'Jobs', class: 'navbar-item') %>
-          <%= mail_to('gaurav@agorium.io', 'Contact', class: 'navbar-item') %>
+          <%= mail_to('gaurav@agorium.io', 'Report issue', class: 'navbar-item') %>
           <div class="navbar-item">
             <div class="buttons">
               <% if logged_in? %>
-                <%= link_to('Seller admin', nil, class: 'button') %>
+                <% if controller_name == 'admin' %>
+                  <%= link_to('My account', '#', class: 'button') %>
+                <% else %>
+                  <%= link_to('Seller admin', admin_path, class: 'button') %>
+                <% end %>
               <% else %>
                 <%= link_to(signup_path, class: 'button is-primary') do %>
                   <strong>Sign up</strong>
