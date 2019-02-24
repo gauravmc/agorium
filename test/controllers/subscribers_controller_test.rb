@@ -32,7 +32,7 @@ class SubscribersControllerTest < ActionDispatch::IntegrationTest
   test "verification redirects with error if Subscriber could not be verified" do
     get subscriber_verification_url('token'), params: { email: subscribers(:shawn).email }
 
-    assert_equal 'Invalid verification link', flash[:danger]
+    assert_equal 'Verification link did not work. You might have already verified your email.', flash[:danger]
     assert_redirected_to root_path
   end
 
@@ -40,7 +40,7 @@ class SubscribersControllerTest < ActionDispatch::IntegrationTest
     subscriber = Subscriber.create(email: 'shawn@hotmail.com')
     get subscriber_verification_url(subscriber.verification_token), params: { email: subscriber.email }
 
-    assert_equal 'Your email was verified successfully!', flash[:success]
+    assert_equal 'Thank you for verifying your email address!', flash[:success]
     assert subscriber.reload.email_verified?
     assert_redirected_to root_path
   end

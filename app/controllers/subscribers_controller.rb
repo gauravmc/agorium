@@ -17,10 +17,10 @@ class SubscribersController < ApplicationController
 
     if subscriber && !subscriber.email_verified? && subscriber.verification_token_valid?(params[:subscriber_id])
       subscriber.email_successfully_verified!
-      flash[:success] = "Your email was verified successfully!"
+      flash[:success] = "Thank you for verifying your email address!"
       redirect_to root_path
     else
-      flash[:danger] = "Invalid verification link"
+      flash[:danger] = "Verification link did not work. You might have already verified your email."
       redirect_to root_path
     end
   end
