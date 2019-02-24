@@ -31,7 +31,7 @@ class SessionsController < ApplicationController
       if is_otp_correct?
         @user.phone_successfully_verified! unless @user.phone_verified?
         log_in @user
-        format.html { redirect_to root_path }
+        format.html { redirect_to admin_path }
       else
         @error_message = 'We couldn’t match that one. Want to try again?'
         format.html { render :verify, status: :unprocessable_entity }

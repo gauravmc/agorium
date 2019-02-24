@@ -13,7 +13,7 @@
   </head>
 
   <body>
-    <nav class="navbar is-light" role="navigation" aria-label="main navigation" data-controller="visibility">
+    <nav class="navbar has-shadow is-spaced" role="navigation" aria-label="main navigation" data-controller="visibility">
       <div class="navbar-brand">
         <%= link_to(root_path, class: 'navbar-item') do %>
           <%= image_tag('A_logo_tiny.png', alt: 'Agorium: Free, open source, & decentralized ecommerce marketplace', width: 28, height: 28) %>
@@ -42,12 +42,12 @@
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons">
-              <%= link_to(signup_path, class: 'button is-primary') do %>
-                <strong>Sign up</strong>
-              <% end %>
               <% if logged_in? %>
-                <%= link_to('Log out', logout_path, class: 'button', method: :delete) %>
+                <%= link_to('Seller admin', nil, class: 'button') %>
               <% else %>
+                <%= link_to(signup_path, class: 'button is-primary') do %>
+                  <strong>Sign up</strong>
+                <% end %>
                 <%= link_to('Log in', login_path, class: 'button') %>
               <% end %>
             </div>
@@ -60,13 +60,7 @@
 
     <footer class="footer">
       <div class="content has-text-centered">
-        <p>
-          <strong>Agorium</strong> is a decentralized, zero-commission, no-fee marketplace, just like the <i>Agoras</i> of the ancient Greek city-states. We're building this platform specifically for small sellers in India to bring their businesses online.
-        </p>
-        <p>
-          The source code of Agorium will be licensed <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content will get licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
-        </p>
-        <p>© 2019-2020</p>
+        <p>© 2019 Agorium</p>
       </div>
     </footer>
   </body>

@@ -15,4 +15,14 @@ class ActiveSupport::TestCase
   def is_logged_in?
     !session[:user_id].nil?
   end
+
+  def is_logged_in_as?(user)
+    assert_equal user.id, session[:user_id]
+  end
+
+  def log_in_as(user)
+    stub_request(:get, /api.authy.com/).to_return(status: 200)
+    post check_otp_url(user.id), params: { otp: '420042' }
+    assert is_logged_in_as?(user)
+  end
 end

@@ -12,4 +12,6 @@ Rails.application.routes.draw do
   post '/check_otp/:user_id', to: 'sessions#check_otp', as: :check_otp
 
   resources :users, only: [:new, :create]
+
+  get '/admin', to: 'admin#index'
 end
