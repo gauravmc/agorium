@@ -26,10 +26,9 @@ class SessionsController < ApplicationController
 
   def check_otp
     @user = User.find(params[:user_id])
-    resp = Twilio::PhoneVerification.check(params[:otp], @user.phone)
 
     respond_to do |format|
-      if resp.code == 200
+      if is_otp_correct?
         @user.phone_successfully_verified! unless @user.phone_verified?
         log_in @user
         format.html { redirect_to root_path }
@@ -50,5 +49,16 @@ class SessionsController < ApplicationController
 
   def session_params
     params.require(:session).permit(:phone)
+  end
+
+  DEV_ENVIRONMENT_OTP = '420042'
+
+  def is_otp_correct?
+    if Rails.env.development?
+      params[:otp] == DEV_ENVIRONMENT_OTP
+    else
+      resp = Twilio::PhoneVerification.check(params[:otp], @user.phone)
+      resp.code == 200
+    end
   end
 end

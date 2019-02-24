@@ -9,6 +9,8 @@ module Twilio
 
     class << self
       def start(phone)
+        return if Rails.env.development?
+
         twilio_params = {
           phone_number: phone,
           via: 'sms',
@@ -21,6 +23,8 @@ module Twilio
       end
 
       def check(otp, phone)
+        return if Rails.env.development?
+
         twilio_params = {
           phone_number: phone,
           country_code: COUNTRY_CODE,

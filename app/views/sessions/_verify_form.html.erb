@@ -8,6 +8,10 @@
     <% else %>
       <p class="help">Enter the OTP number that we messaged you</p>
     <% end %>
+
+    <% if Rails.env.development? %>
+      <p class="help is-info">Enter '420042' as OTP in dev environment</p>
+    <% end %>
   </div>
 
   <div class="actions">
