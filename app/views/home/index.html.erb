@@ -9,25 +9,16 @@
   </div>
 </section>
 
-<section class="section is-medium has-background-grey">
+<section class="section is-medium has-background-grey-light">
   <div class="container">
     <div class="columns is-vcentered">
       <div class="column">
-        <p class="title has-text-white-ter">Stay up to date</p>
-        <p class="subtitle is-4 has-text-white-ter">Interested in how this program fares? Enter your email to receive our updates.</p>
+        <p class="title has-text-grey-dark">Stay up to date</p>
+        <p class="subtitle is-4 has-text-grey-dark">Interested in how this program fares? Enter your email to receive our updates.</p>
       </div>
 
       <div class="column">
-        <%= form_with(url: nil) do |f| %>
-          <div class="field is-grouped">
-            <p class="control is-expanded">
-              <%= f.email_field :email, class: 'input is-medium', placeholder: 'Email address', disabled: 'disabled' %>
-            </p>
-            <p class="control">
-              <%= f.submit 'Subscribe', class: 'button is-info is-medium', disabled: 'disabled'  %>
-            </p>
-          </div>
-        <% end%>
+        <%= render 'subscribers/form', subscriber: Subscriber.new %>
       </div>
     </div>
   </div>

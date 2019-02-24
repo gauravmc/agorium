@@ -1,0 +1,16 @@
+<%= form_with(model: subscriber, url: subscribers_path, id: 'subscriptionForm') do |f| %>
+  <div class="field is-grouped">
+    <div class="control is-expanded">
+      <%= f.email_field :email, class: "input is-medium #{'is-danger' if subscriber.errors.any?}", placeholder: 'Email address' %>
+      <% if subscriber.errors.any? %>
+        <% subscriber.errors.full_messages.each do |message| %>
+          <p class="help is-danger"><%= message %></p>
+        <% end %>
+      <% end %>
+    </div>
+
+    <p class="control">
+      <%= f.submit 'Subscribe', class: 'button is-info is-medium' %>
+    </p>
+  </div>
+<% end%>

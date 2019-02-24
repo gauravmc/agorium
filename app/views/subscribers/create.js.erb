@@ -1,0 +1,5 @@
+<% if @subscriber.errors.any? %>
+  document.querySelector('#subscriptionForm').outerHTML = "<%= j render 'form', subscriber: @subscriber %>";
+<% else %>
+  document.querySelector('#subscriptionForm').outerHTML = "<p class='subtitle is-4 has-text-info'>Thank you for subscribing!</p>";
+<% end %>

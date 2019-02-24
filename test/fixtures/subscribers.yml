@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+shawn:
+  email: shawn@gmail.com
+  email_verified: false
+
+dibs:
+  email: dibs.ab@dibs.com
+  email_verified: false

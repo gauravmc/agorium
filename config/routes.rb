@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   post '/check_otp/:user_id', to: 'sessions#check_otp', as: :check_otp
 
   resources :users, only: [:new, :create]
+  resources :subscribers, only: [:create] do
+    get :verification
+  end
 
   get '/admin', to: 'admin#index'
 end
