@@ -42,6 +42,7 @@ class SessionsController < ApplicationController
 
   def destroy
     log_out if logged_in?
+    flash[:info] = "You were successfully logged out of your account."
     redirect_to root_path
   end
 

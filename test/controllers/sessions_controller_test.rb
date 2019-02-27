@@ -124,6 +124,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
 
     delete logout_path
     refute is_logged_in?
+    assert flash[:info].present?
     assert_redirected_to root_path
   end
 end
