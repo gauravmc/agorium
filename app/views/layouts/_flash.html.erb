@@ -1,14 +1,8 @@
 <% unless flash.empty? %>
-  <section class="hero" data-controller="flash" data-target="flash.section" data-flash-count="<%= flash.count %>">
-    <div class="hero-body">
-      <div class="container">
-        <% flash.each do |key, value| %>
-          <div class="notification is-<%= key %>">
-            <button class="delete" data-action="flash#remove"></button>
-            <%= value %>
-          </div>
-        <% end %>
-      </div>
+  <% flash.each do |key, value| %>
+    <div class="notification is-<%= key %>" data-controller="flash" data-target="flash.notification">
+      <button class="delete" data-action="flash#remove"></button>
+      <%= value %>
     </div>
-  </section>
+  <% end %>
 <% end %>

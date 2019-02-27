@@ -15,7 +15,7 @@
   </head>
 
   <body>
-    <nav class="navbar has-shadow is-spaced" role="navigation" aria-label="main navigation" data-controller="visibility">
+    <nav class="navbar has-shadow" role="navigation" aria-label="main navigation" data-controller="visibility">
       <div class="navbar-brand">
         <%= link_to(root_path, class: 'navbar-item') do %>
           <%= image_tag('A_logo_tiny.png', alt: 'Agorium: Free, open source, & decentralized ecommerce marketplace', width: 28, height: 28) %>
@@ -31,29 +31,43 @@
 
       <div class="navbar-menu" data-target="visibility.section">
         <div class="navbar-end">
-          <%= mail_to('gaurav@agorium.io', 'Contact', class: 'navbar-item') %>
           <div class="navbar-item">
             <div class="buttons">
-              <% if logged_in? %>
-                <%= link_to('Seller admin', admin_path, class: 'button') %>
-              <% else %>
-                <%= link_to(signup_path, class: 'button is-primary') do %>
-                  <strong>Sign up</strong>
-                <% end %>
-                <%= link_to('Log in', login_path, class: 'button') %>
-              <% end %>
+              <%= link_to('Log out', logout_path, class: 'button', method: :delete) %>
             </div>
           </div>
         </div>
       </div>
     </nav>
 
-    <section class="section">
-      <div class="container">
-        <%= render 'layouts/flash' %>
-        <%= yield %>
+    <main class="section">
+      <div class="columns">
+        <div class="column is-one-fifth">
+          <aside class="menu">
+            <p class="menu-label">
+              General
+            </p>
+            <ul class="menu-list">
+              <li><a class="is-active">Dashboard</a></li>
+              <li><a>Customers</a></li>
+              <li><a>Products</a></li>
+              <li><a>Orders</a></li>
+            </ul>
+            <p class="menu-label">
+              Settings
+            </p>
+            <ul class="menu-list">
+              <li><a>Payments</a></li>
+              <li><a>Account</a></li>
+            </ul>
+          </aside>
+        </div>
+        <div class="column">
+          <%= render 'layouts/flash' %>
+          <%= yield %>
+        </div>
       </div>
-    </section>
+    </main>
 
     <footer class="footer">
       <div class="content has-text-centered">
