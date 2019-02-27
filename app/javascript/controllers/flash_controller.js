@@ -1,17 +1,17 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = [ "section", "notification" ]
+  static targets = [ "section" ]
 
-  remove() {
-    this.removeNotification()
+  remove(event) {
+    this.removeNotification(event.target.parentNode)
 
     if (this.getFlashCount() === 0)
       this.removeFlashSection()
   }
 
-  removeNotification() {
-    this.notificationTarget.parentNode.removeChild(this.notificationTarget)
+  removeNotification(notification) {
+    notification.parentNode.removeChild(notification)
     this.decrementFlashCount()
   }
 
@@ -24,6 +24,6 @@ export default class extends Controller {
   }
 
   getFlashCount() {
-    return parseInt(this.sectionTarget.dataset.flashCount)
+    return parseInt(this.data.get('count'))
   }
 }

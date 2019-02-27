@@ -6,6 +6,6 @@ export default class extends Controller {
   toggle() {
     this.sectionTargets.forEach(function(section) {
       section.classList.toggle('is-active')
-    });
+    })
   }
 }
