@@ -88,4 +88,10 @@ class UserTest < ActiveSupport::TestCase
     assert user.save
     assert user.id
   end
+
+  test "user has many products" do
+    user = users(:dibs)
+    assert user.products.any?
+    assert_equal 3, user.products.count
+  end
 end
