@@ -63,8 +63,12 @@
           </aside>
         </div>
         <div class="column">
-          <%= render 'layouts/flash' %>
-          <%= yield %>
+          <div class="columns is-centered">
+            <div class="column is-two-thirds-tablet is-half-desktop is-half-widescreen is-two-fifths-fullhd">
+              <%= render 'shared/flash' %>
+              <%= yield %>
+            </div>
+          </div>
         </div>
       </div>
     </main>
