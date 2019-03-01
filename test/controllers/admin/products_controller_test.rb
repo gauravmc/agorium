@@ -63,7 +63,8 @@ class Admin
         description: "Cool New Product is very cool.",
         price: 42.24,
         cost: 24.42,
-        inventory: 42
+        inventory: 42,
+        photos: [fixture_file_upload(file_fixture('cool_product.jpeg'))]
       }
     end
   end

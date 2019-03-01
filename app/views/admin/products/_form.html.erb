@@ -32,17 +32,22 @@
   <div class="field">
     <div class="file is-medium is-boxed">
       <label class="file-label">
-        <%= f.file_field :images, multiple: true, accept: 'image/jpeg', class: 'file-input' %>
+        <%= f.file_field :photos, multiple: true, accept: 'image/jpeg', class: 'file-input' %>
         <span class="file-cta">
           <span class="file-icon">
             <i class="fas fa-upload"></i>
           </span>
           <span class="file-label">
-            Choose product images
+            Upload product photos
           </span>
         </span>
       </label>
     </div>
+    <% if @product.errors[:photos].any? %>
+      <% @product.errors[:photos].each do |message| %>
+        <p class="help is-danger">Photos <%= message %></p>
+      <% end %>
+    <% end %>
   </div>
 
   <div class="field">

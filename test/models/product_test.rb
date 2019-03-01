@@ -1,9 +1,21 @@
 require 'test_helper'
 
 class ProductTest < ActiveSupport::TestCase
+  PRODUCT_FIXTURES_PHOTOS = {
+    wedding_card: ['wedding_card.jpeg', 'wedding_card_2.jpeg'],
+    summer_butter: ['summer_butter.jpeg', 'summer_butter_2.jpeg', 'summer_butter_3.jpeg'],
+    fire_balm: ['fire_balm_1.jpeg'],
+    charcoal_soap: ['charcoal_soap.jpeg', 'charcoal_soap_2.jpeg']
+  }
+
   setup do
     @product = products(:summer_butter)
     @user = users(:dibs)
+    attach_product_fixtures_photos
+  end
+
+  teardown do
+    purge_product_fixtures_photos
   end
 
   test "name cannot be blank" do
@@ -115,6 +127,25 @@ class ProductTest < ActiveSupport::TestCase
     assert_equal 1234, @product.inventory
   end
 
+  test "product cannot be saved without at least one photo" do
+    existing_product = products(:summer_butter)
+    existing_product.photos.purge
+    refute existing_product.save
+    assert_equal ["Photos must be present. Add at least one photo"], @product.errors.full_messages
+
+    product = new_product
+    product.photos.detach
+    refute product.save
+    assert_equal ["Photos must be present. Add at least one photo"], @product.errors.full_messages
+  end
+
+  test "product photo must be of jpeg format" do
+    product = products(:wedding_card)
+    product.photos.attach(io: file_fixture('avatar.png').open, filename: 'avatar.png')
+    refute product.save
+    assert_equal ["Photos must be of type image/jpeg only"], product.errors.full_messages
+  end
+
   test "product attributes have correct values after a valid creation" do
     product = new_product
 
@@ -127,9 +158,26 @@ class ProductTest < ActiveSupport::TestCase
     assert_equal 42, product.inventory
     assert product.published_at.present?
     assert_equal @user.id, product.owner.id
+    assert product.photos.attached?
+    assert_equal 'cool_product.jpeg', product.photos.first.filename.to_s
   end
 
   private
+
+  def attach_product_fixtures_photos
+    PRODUCT_FIXTURES_PHOTOS.each do |fixture, filenames|
+      p = products(fixture)
+      filenames.each do |filename|
+        p.photos.attach(io: file_fixture(filename).open, filename: filename)
+      end
+    end
+  end
+
+  def purge_product_fixtures_photos
+    PRODUCT_FIXTURES_PHOTOS.keys.each do |fixture|
+      products(fixture).photos.purge
+    end
+  end
 
   def new_product
     Product.new(
@@ -138,6 +186,7 @@ class ProductTest < ActiveSupport::TestCase
       price: 42.24,
       cost: 24.42,
       inventory: 42,
+      photos: [Rack::Test::UploadedFile.new(file_fixture('cool_product.jpeg'))],
       owner: @user
     )
   end
