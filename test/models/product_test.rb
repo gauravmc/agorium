@@ -3,6 +3,7 @@ require 'test_helper'
 class ProductTest < ActiveSupport::TestCase
   setup do
     @product = products(:summer_butter)
+    @user = users(:dibs)
   end
 
   test "name cannot be blank" do
@@ -80,6 +81,22 @@ class ProductTest < ActiveSupport::TestCase
     assert_equal "summer-butter", @product.handle
   end
 
+  test "handle must be unique for given user" do
+    product = new_product
+    product.name = @user.products.first.name
+
+    refute product.save
+    assert_equal ["Handle has already been taken"], product.errors.full_messages
+  end
+
+  test "different users can have duplicate handle" do
+    product = new_product
+    product.name = users(:shawn).products.first.name
+
+    assert product.save
+    assert_equal 'wedding-card', product.handle
+  end
+
   test "inventory must be an integer" do
     @product.inventory = "invalid"
     refute @product.save
@@ -99,14 +116,7 @@ class ProductTest < ActiveSupport::TestCase
   end
 
   test "product attributes have correct values after a valid creation" do
-    product = Product.new(
-      name: "Cool New Product",
-      description: "Cool New Product is very cool.",
-      price: 42.24,
-      cost: 24.42,
-      inventory: 42,
-      owner: users(:shawn)
-    )
+    product = new_product
 
     assert product.save
     assert_equal "Cool New Product", product.name
@@ -116,6 +126,19 @@ class ProductTest < ActiveSupport::TestCase
     assert_equal 24.42, product.cost.to_f
     assert_equal 42, product.inventory
     assert product.published_at.present?
-    assert_equal users(:shawn).id, product.owner.id
+    assert_equal @user.id, product.owner.id
+  end
+
+  private
+
+  def new_product
+    Product.new(
+      name: "Cool New Product",
+      description: "Cool New Product is very cool.",
+      price: 42.24,
+      cost: 24.42,
+      inventory: 42,
+      owner: @user
+    )
   end
 end

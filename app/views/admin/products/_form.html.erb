@@ -2,10 +2,16 @@
   <div class="field">
     <%= f.label 'Name', class: 'label' %>
     <div class="control">
-      <%= f.text_field :name, class: "input is-medium #{'is-danger' if @product.errors[:name].any?}", placeholder: 'Give your product a catchy title' %>
+      <%= f.text_field :name, class: "input is-medium #{'is-danger' if @product.errors[:name].any? || @product.errors[:handle].any?}", placeholder: 'Give your product a catchy title' %>
     </div>
     <% if @product.errors[:name].any? %>
       <% @product.errors[:name].each do |message| %>
+        <p class="help is-danger">Product name <%= message %></p>
+      <% end %>
+    <% end %>
+
+    <% if @product.errors[:handle].any? %>
+      <% @product.errors[:handle].each do |message| %>
         <p class="help is-danger">Product name <%= message %></p>
       <% end %>
     <% end %>

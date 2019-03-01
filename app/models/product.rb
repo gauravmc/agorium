@@ -10,10 +10,11 @@ class Product < ApplicationRecord
     less_than_or_equal_to: BigDecimal(10**7)
   }
   validates :inventory, numericality: { greater_than_or_equal_to: 0 }
+  validates :handle, uniqueness: { scope: :owner_id }
 
   belongs_to :owner, class_name: 'User'
 
-  before_save :set_handle
+  before_validation :set_handle
   before_create :set_published_at
 
   private

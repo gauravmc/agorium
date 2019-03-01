@@ -43,6 +43,7 @@ class Admin
       assert_redirected_to new_admin_product_url
       assert_equal new_product_params[:name], @user.products.last.name
 
+      Product.last.destroy
       assert_difference('Product.count') do
         post admin_products_url, params: { product: new_product_params }, xhr: true
       end
