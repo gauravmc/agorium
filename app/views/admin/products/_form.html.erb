@@ -30,6 +30,22 @@
   </div>
 
   <div class="field">
+    <div class="file is-medium is-boxed">
+      <label class="file-label">
+        <%= f.file_field :images, multiple: true, accept: 'image/jpeg', class: 'file-input' %>
+        <span class="file-cta">
+          <span class="file-icon">
+            <i class="fas fa-upload"></i>
+          </span>
+          <span class="file-label">
+            Choose product images
+          </span>
+        </span>
+      </label>
+    </div>
+  </div>
+
+  <div class="field">
     <%= f.label 'Selling price', class: 'label' %>
     <div class="control has-icons-left">
       <%= f.number_field :price, class: "input is-medium #{'is-danger' if @product.errors[:price].any?}", placeholder: 'Rupee amount', step: 0.01 %>

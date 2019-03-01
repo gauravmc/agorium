@@ -34,7 +34,8 @@ gem 'turbolinks', '~> 5.2.0'
 # Custom gems
 
 gem 'http', '~> 4.0.5'
-gem "appengine", "~> 0.4.6"
+gem 'appengine', '~> 0.4.6'
+gem 'google-cloud-storage', '~> 1.17.0', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

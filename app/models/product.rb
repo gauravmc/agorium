@@ -17,6 +17,8 @@ class Product < ApplicationRecord
   before_validation :set_handle
   before_create :set_published_at
 
+  has_many_attached :images
+
   private
 
   def set_handle

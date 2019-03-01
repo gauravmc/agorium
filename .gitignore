@@ -64,3 +64,4 @@ yarn-debug.log*
 
 # Ignore Google App Engine Config
 app.yaml
+config/gckeyfile.json
