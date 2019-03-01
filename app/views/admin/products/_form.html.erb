@@ -1,0 +1,75 @@
+<%= form_with(model: @product, url: admin_products_path) do |f| %>
+  <div class="field">
+    <%= f.label 'Name', class: 'label' %>
+    <div class="control">
+      <%= f.text_field :name, class: "input is-medium #{'is-danger' if @product.errors[:name].any?}", placeholder: 'Give your product a catchy title' %>
+    </div>
+    <% if @product.errors[:name].any? %>
+      <% @product.errors[:name].each do |message| %>
+        <p class="help is-danger">Product name <%= message %></p>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label 'Description', class: 'label' %>
+    <div class="control">
+      <%= f.text_area :description, class: "textarea is-medium #{'is-danger' if @product.errors[:description].any?}", placeholder: "Describe your product's features, specifications and unique value proposition", rows: 5 %>
+    </div>
+    <% if @product.errors[:description].any? %>
+      <% @product.errors[:description].each do |message| %>
+        <p class="help is-danger">Product description <%= message %></p>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label 'Selling price', class: 'label' %>
+    <div class="control has-icons-left">
+      <%= f.number_field :price, class: "input is-medium #{'is-danger' if @product.errors[:price].any?}", placeholder: 'Rupee amount', step: 0.01 %>
+      <span class="icon is-small is-left">
+        <i class="fas fa-rupee-sign"></i>
+      </span>
+    </div>
+    <% if @product.errors[:price].any? %>
+      <% @product.errors[:price].each do |message| %>
+        <p class="help is-danger">Selling price <%= message %></p>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label 'Cost price', class: 'label' %>
+    <div class="control has-icons-left">
+      <%= f.number_field :cost, class: "input is-medium #{'is-danger' if @product.errors[:cost].any?}", placeholder: 'Rupee amount', step: 0.01 %>
+      <span class="icon is-small is-left">
+        <i class="fas fa-rupee-sign"></i>
+      </span>
+    </div>
+    <% if @product.errors[:cost].any? %>
+      <% @product.errors[:cost].each do |message| %>
+        <p class="help is-danger">Cost price <%= message %></p>
+      <% end %>
+    <% else %>
+      <p class="help">This helps fully automate accounting calculations for you</p>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label 'Inventory', class: 'label' %>
+    <div class="control">
+      <%= f.number_field :inventory, class: "input is-medium #{'is-danger' if @product.errors[:name].any?}", placeholder: 'Quantity you have in stock' %>
+    </div>
+    <% if @product.errors[:inventory].any? %>
+      <% @product.errors[:inventory].each do |message| %>
+        <p class="help is-danger">Inventory <%= message %></p>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <div class="control">
+    <%= f.submit 'Create product', class: 'button is-primary is-medium is-fullwidth', data: { "disable-with": "Creating product..." } %>
+    </div>
+  </div>
+<% end %>
