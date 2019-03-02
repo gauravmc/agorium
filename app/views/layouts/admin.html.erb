@@ -13,70 +13,100 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= favicon_link_tag 'favicon.ico' %>
   </head>
-
   <body>
-    <nav class="navbar has-shadow" role="navigation" aria-label="main navigation" data-controller="visibility">
-      <div class="navbar-brand">
-        <%= link_to(root_path, class: 'navbar-item') do %>
-          <%= image_tag('A_logo_tiny.png', alt: 'Agorium: Free, open source, & decentralized ecommerce marketplace', width: 28, height: 28) %>
-          <%= image_tag('agorium_black_small.png', width: 110, style: 'margin-left: 5px !important') %>
-        <% end %>
-
-        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-action="visibility#toggle" data-target="visibility.section">
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
-
-      <div class="navbar-menu" data-target="visibility.section">
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <div class="buttons">
-              <%= link_to('Log out', logout_path, class: 'button', method: :delete) %>
+    <section class="hero is-fullheight">
+      <div class="hero-head" style="padding: 1.0rem;">
+        <nav class="level is-mobile" role="navigation" aria-label="main navigation">
+          <div class="level-left">
+            <div class="level-item has-text-centered">
+              <%= link_to(root_path) do %>
+                <%= image_tag('A_logo_small.png', alt: 'Agorium: Free, open source, & decentralized ecommerce marketplace', width: 42, height: 42) %>
+              <% end %>
             </div>
           </div>
-        </div>
-      </div>
-    </nav>
 
-    <main class="section">
-      <div class="columns">
-        <div class="column is-one-fifth is-hidden-mobile">
-          <aside class="menu">
-            <p class="menu-label">
-              General
+          <p class="level-item has-text-centered is-hidden-touch">
+            <%= image_tag('agorium_black_tiny.png', style: 'height: 30px;') %>
+          </p>
+
+          <div class="level-right">
+            <p class="level-item">
+              <%= yield(:navigation_action) %>
             </p>
-            <ul class="menu-list">
-              <li><%= link_to 'Dashboard', admin_dashboard_index_path, class: "#{'is-active' if controller_name == 'dashboard'}" %></li>
-              <li><%= link_to 'Products', admin_products_path, class: "#{'is-active' if controller_name == 'products'}" %></li>
-              <li><a>Customers</a></li>
-              <li><a>Orders</a></li>
-            </ul>
-            <p class="menu-label">
-              Settings
-            </p>
-            <ul class="menu-list">
-              <li><a>Payments</a></li>
-              <li><a>Account</a></li>
-            </ul>
-          </aside>
-        </div>
-        <div class="column">
-          <div class="columns is-centered">
-            <div class="column <%= yield(:section_width).presence || 'is-two-thirds-tablet is-half-desktop is-half-widescreen is-two-fifths-fullhd' %>">
-              <%= render 'shared/flash' %>
-              <%= yield %>
-            </div>
           </div>
+        </nav>
+      </div>
+
+      <div class="hero-body is-block" style="padding-top: 2.0rem; padding-bottom: 5.0rem;">
+        <div class="container">
+          <%= render 'shared/flash' %>
+          <%= yield %>
         </div>
       </div>
-    </main>
 
-    <footer class="footer">
-      <div class="content has-text-centered">
-        <p>© 2019 Agorium</p>
+      <div class="hero-foot">
+        <nav class="navbar is-fixed-bottom is-hidden-desktop has-shadow has-background-white-bis" role="navigation">
+          <div class="navbar-brand">
+            <%= link_to admin_dashboard_index_path, class: "navbar-item is-expanded is-block has-text-centered #{'is-active' if controller_name == 'dashboard'}" do %>
+              <i class="fa fa-chart-line"></i>
+              <p>Dashboard</p>
+            <% end %>
+            <%= link_to admin_products_path, class: "navbar-item is-expanded is-block has-text-centered #{'is-active' if controller_name == 'products'}" do %>
+              <i class="fa fa-tags"></i>
+              <p>Products</p>
+            <% end %>
+            <a class="navbar-item is-expanded is-block has-text-centered">
+              <i class="fa fa-shopping-basket"></i>
+              <p>Orders</p>
+            </a>
+            <a class="navbar-item is-expanded is-block has-text-centered">
+              <i class="fa fa-cog"></i>
+              <p>Settings</p>
+            </a>
+          </div>
+        </nav>
+
+        <div class="tabs is-boxed is-medium is-fullwidth is-hidden-touch">
+          <ul>
+            <li class="<%= 'is-active' if controller_name == 'dashboard' %>">
+              <%= link_to admin_dashboard_index_path do %>
+                <span class="icon is-small"><i class="fa fa-chart-line" aria-hidden="true"></i></span>
+                <span>Dashboard</span>
+              <% end %>
+            </li>
+            <li class="<%= 'is-active' if controller_name == 'products' %>">
+              <%= link_to admin_products_path do %>
+                <span class="icon is-small"><i class="fa fa-tags" aria-hidden="true"></i></span>
+                <span>Products</span>
+              <% end %>
+            </li>
+            <li>
+              <a>
+                <span class="icon is-small"><i class="fa fa-shopping-basket" aria-hidden="true"></i></span>
+                <span>Orders</span>
+              </a>
+            </li>
+            <li>
+              <a>
+                <span class="icon is-small"><i class="fa fa-users" aria-hidden="true"></i></span>
+                <span>Customers</span>
+              </a>
+            </li>
+            <li>
+              <a>
+                <span class="icon is-small"><i class="fa fa-credit-card" aria-hidden="true"></i></span>
+                <span>Payments</span>
+              </a>
+            </li>
+            <li>
+              <a>
+                <span class="icon is-small"><i class="fa fa-cog" aria-hidden="true"></i></span>
+                <span>Settings</span>
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
-    </footer>
+    </section>
   </body>
 </html>

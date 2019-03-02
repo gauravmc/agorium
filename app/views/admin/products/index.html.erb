@@ -1,12 +1,10 @@
 <% provide(:title, 'Your Products') %>
 
+<% content_for :navigation_action do %>
+  <%= link_to 'Add a product', new_admin_product_path, class: 'button is-medium is-primary' %>
+<% end %>
+
 <% if @products.any? %>
-  <% provide(:section_width, 'is-four-fifths') %>
-
-  <%= link_to new_admin_product_path, class: 'button is-primary is-rounded is-pulled-right' do %>
-    <span class="icon is-medium"><i class="fas fa-plus"></i></span>
-  <% end %>
-
   <table class="table is-hoverable is-fullwidth">
     <thead>
       <tr>
@@ -22,10 +20,10 @@
         <tr>
           <td><%= image_tag product.photos.first.variant(resize: "100x100") %></td>
           <%# <td><%= image_tag url_for(product.photos.first) %1></td> %>
-          <td><%= product.name %></td>
-          <td><%= product.inventory %></td>
-          <td class="is-hidden-mobile"><%= number_to_currency(product.price, unit: '₹', format: '%u %n') %></td>
-          <td>
+          <td class="is-size-5" align="center" valign="center"><%= product.name %></td>
+          <td class="is-size-5"><%= product.inventory %></td>
+          <td class="is-hidden-mobile is-size-5"><%= number_to_currency(product.price, unit: '₹', format: '%u %n') %></td>
+          <td class="is-size-5">
             <%= link_to admin_product_path(product), class: 'has-text-dark', data: { confirm: "Are you sure you want to remove #{product.name}?" }, method: :delete, remote: true do %>
               <span class="icon is-small"><i class="fas fa-trash-alt"></i></span>
             <% end %>
@@ -35,5 +33,12 @@
     </tbody>
   </table>
 <% else %>
-  <%= link_to 'Add a new product', new_admin_product_path, class: 'button is-primary is-large is-fullwidth' %>
+  <div class="content">
+    <h2 class="title">
+      Your Products
+    </h2>
+    <p class="subtitle">
+      Start adding some products by clicking the 'Add a product' button on the top right-hand corner!
+    </p>
+  </div>
 <% end %>
