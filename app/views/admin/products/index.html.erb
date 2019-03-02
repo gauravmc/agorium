@@ -1,0 +1,23 @@
+<% provide(:title, 'Your Products') %>
+
+<table class="table is-hoverable is-fullwidth">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Product name</th>
+      <th>Quantity in stock</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= image_tag product.photos.first.variant(resize: "100x100") %></td>
+        <%# <td><%= image_tag url_for(product.photos.first) %1></td> %>
+        <td><%= product.name %></td>
+        <td><%= product.inventory %></td>
+        <th><%= number_to_currency(product.price, unit: '₹', format: '%u %n') %></th>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

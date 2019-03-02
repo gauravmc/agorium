@@ -1,4 +1,8 @@
 class Admin::ProductsController < AdminController
+  def index
+    @products = current_user.products.with_attached_photos
+  end
+
   def new
     @product = current_user.products.new
   end
@@ -9,7 +13,7 @@ class Admin::ProductsController < AdminController
     respond_to do |format|
       if @product.save
         flash[:success] = "#{@product.name} was successfully added to your products!"
-        format.html { redirect_to new_admin_product_path }
+        format.html { redirect_to admin_products_path }
       else
         flash.now[:danger] = "Product could not be created because of some input errors."
         format.html { render :new, status: :unprocessable_entity }

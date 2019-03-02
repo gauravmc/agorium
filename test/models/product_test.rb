@@ -1,13 +1,6 @@
 require 'test_helper'
 
 class ProductTest < ActiveSupport::TestCase
-  PRODUCT_FIXTURES_PHOTOS = {
-    wedding_card: ['wedding_card.jpeg', 'wedding_card_2.jpeg'],
-    summer_butter: ['summer_butter.jpeg', 'summer_butter_2.jpeg', 'summer_butter_3.jpeg'],
-    fire_balm: ['fire_balm_1.jpeg'],
-    charcoal_soap: ['charcoal_soap.jpeg', 'charcoal_soap_2.jpeg']
-  }
-
   setup do
     @product = products(:summer_butter)
     @user = users(:dibs)
@@ -163,21 +156,6 @@ class ProductTest < ActiveSupport::TestCase
   end
 
   private
-
-  def attach_product_fixtures_photos
-    PRODUCT_FIXTURES_PHOTOS.each do |fixture, filenames|
-      p = products(fixture)
-      filenames.each do |filename|
-        p.photos.attach(io: file_fixture(filename).open, filename: filename)
-      end
-    end
-  end
-
-  def purge_product_fixtures_photos
-    PRODUCT_FIXTURES_PHOTOS.keys.each do |fixture|
-      products(fixture).photos.purge
-    end
-  end
 
   def new_product
     Product.new(

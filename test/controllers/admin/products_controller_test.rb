@@ -7,6 +7,19 @@ class Admin
       log_in_as(@user)
     end
 
+    test "index renders list of products" do
+      attach_product_fixtures_photos
+
+      get admin_products_url
+
+      assert_response :success
+
+      products = @user.products
+      assert_match 'Your Products', @response.body
+      assert_match products.first.name, @response.body
+      assert_match products.last.name, @response.body
+    end
+
     test "new renders new product page" do
       get new_admin_product_url
 
@@ -40,7 +53,7 @@ class Admin
       end
 
       assert_equal "#{new_product_params[:name]} was successfully added to your products!", flash[:success]
-      assert_redirected_to new_admin_product_url
+      assert_redirected_to admin_products_url
       assert_equal new_product_params[:name], @user.products.last.name
 
       Product.last.destroy
@@ -51,7 +64,7 @@ class Admin
       assert_response :success
       assert_equal "text/javascript", @response.content_type
       assert_equal "#{new_product_params[:name]} was successfully added to your products!", flash[:success]
-      assert_match new_admin_product_url, @response.body
+      assert_match admin_products_url, @response.body
       assert_equal new_product_params[:name], @user.products.last.name
     end
 
