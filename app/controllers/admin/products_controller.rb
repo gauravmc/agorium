@@ -1,4 +1,6 @@
 class Admin::ProductsController < AdminController
+  before_action :set_product, only: [:destroy]
+
   def index
     @products = current_user.products.with_attached_photos
   end
@@ -22,7 +24,20 @@ class Admin::ProductsController < AdminController
     end
   end
 
+  def destroy
+    @product.destroy
+
+    respond_to do |format|
+      flash[:success] = "#{@product.name} was deleted from your products."
+      format.html { redirect_to admin_products_path }
+    end
+  end
+
   private
+
+  def set_product
+    @product = current_user.products.find(params[:id])
+  end
 
   def product_params
     params.require(:product).permit(:name, :description, :price, :cost, :inventory, photos: [])

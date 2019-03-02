@@ -1,4 +1,5 @@
 <% provide(:title, 'Your Products') %>
+<% provide(:section_width, 'is-four-fifths') %>
 
 <table class="table is-hoverable is-fullwidth">
   <thead>
@@ -6,7 +7,8 @@
       <th></th>
       <th>Product name</th>
       <th>Quantity in stock</th>
-      <th>Price</th>
+      <th class="is-hidden-mobile">Price</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -16,7 +18,12 @@
         <%# <td><%= image_tag url_for(product.photos.first) %1></td> %>
         <td><%= product.name %></td>
         <td><%= product.inventory %></td>
-        <th><%= number_to_currency(product.price, unit: '₹', format: '%u %n') %></th>
+        <td class="is-hidden-mobile"><%= number_to_currency(product.price, unit: '₹', format: '%u %n') %></td>
+        <td>
+          <%= link_to admin_product_path(product), class: 'has-text-dark', data: { confirm: "Are you sure you want to remove #{product.name}?" }, method: :delete, remote: true do %>
+            <span class="icon is-small"><i class="fas fa-trash-alt"></i></span>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>

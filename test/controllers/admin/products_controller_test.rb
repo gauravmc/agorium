@@ -31,14 +31,14 @@ class Admin
       params = new_product_params
       params[:price] = ""
 
-      assert_no_difference('Product.count') do
+      assert_no_difference('@user.products.count') do
         post admin_products_url, params: { product: params }
       end
 
       assert_response :unprocessable_entity
       assert_match "Selling price is not a number", @response.body
 
-      assert_no_difference('Product.count') do
+      assert_no_difference('@user.products.count') do
         post admin_products_url, params: { product: params }, xhr: true
       end
 
@@ -48,7 +48,7 @@ class Admin
     end
 
     test "create redirects with success message when product is valid" do
-      assert_difference('Product.count') do
+      assert_difference('@user.products.count') do
         post admin_products_url, params: { product: new_product_params }
       end
 
@@ -57,7 +57,7 @@ class Admin
       assert_equal new_product_params[:name], @user.products.last.name
 
       Product.last.destroy
-      assert_difference('Product.count') do
+      assert_difference('@user.products.count') do
         post admin_products_url, params: { product: new_product_params }, xhr: true
       end
 
@@ -66,6 +66,17 @@ class Admin
       assert_equal "#{new_product_params[:name]} was successfully added to your products!", flash[:success]
       assert_match admin_products_url, @response.body
       assert_equal new_product_params[:name], @user.products.last.name
+    end
+
+    test "destroy removes the product from the database" do
+      product = @user.products.first
+
+      assert_difference('@user.products.count', -1) do
+        delete admin_product_url(product)
+      end
+
+      assert_equal "#{product.name} was deleted from your products.", flash[:success]
+      assert_redirected_to admin_products_url
     end
 
     private

@@ -64,7 +64,7 @@
         </div>
         <div class="column">
           <div class="columns is-centered">
-            <div class="column is-two-thirds-tablet is-half-desktop is-half-widescreen is-two-fifths-fullhd">
+            <div class="column <%= yield(:section_width).presence || 'is-two-thirds-tablet is-half-desktop is-half-widescreen is-two-fifths-fullhd' %>">
               <%= render 'shared/flash' %>
               <%= yield %>
             </div>
