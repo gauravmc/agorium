@@ -30,9 +30,9 @@
   </div>
 
   <div class="field">
-    <div class="file is-medium is-boxed">
+    <div class="file is-medium is-boxed" data-controller="upload">
       <label class="file-label">
-        <%= f.file_field :photos, multiple: true, accept: 'image/jpeg', class: 'file-input' %>
+        <%= f.file_field :photos, multiple: true, accept: 'image/jpeg', class: 'file-input', data: { action: 'upload#updateFilenames' } %>
         <span class="file-cta">
           <span class="file-icon">
             <i class="fas fa-upload"></i>
@@ -40,6 +40,8 @@
           <span class="file-label">
             Upload product photos
           </span>
+        </span>
+        <span data-target="upload.filenames">
         </span>
       </label>
     </div>
