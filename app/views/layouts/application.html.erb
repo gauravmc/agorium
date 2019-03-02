@@ -35,7 +35,7 @@
           <div class="navbar-item">
             <div class="buttons">
               <% if logged_in? %>
-                <%= link_to('Seller admin', admin_path, class: 'button') %>
+                <%= link_to('Seller admin', admin_root_path, class: 'button') %>
               <% else %>
                 <%= link_to(signup_path, class: 'button is-primary') do %>
                   <strong>Sign up</strong>

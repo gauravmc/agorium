@@ -16,9 +16,10 @@ Rails.application.routes.draw do
     get :verification
   end
 
-  get '/admin', to: 'admin#index'
+  get '/admin', to: 'admin#index', as: :admin_root
 
   namespace :admin do
     resources :products
+    resources :dashboard, only: [:index]
   end
 end

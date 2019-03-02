@@ -48,10 +48,10 @@
               General
             </p>
             <ul class="menu-list">
-              <li><%= link_to 'Dashboard', admin_path, class: "#{'is-active' if controller_name == 'admin'}" %></li>
-              <li><%= link_to 'Customers', '#', class: "#{'is-active' if controller_name == 'customers'}" %></li>
+              <li><%= link_to 'Dashboard', admin_dashboard_index_path, class: "#{'is-active' if controller_name == 'dashboard'}" %></li>
               <li><%= link_to 'Products', admin_products_path, class: "#{'is-active' if controller_name == 'products'}" %></li>
-              <li><%= link_to 'Orders', '#', class: "#{'is-active' if controller_name == 'orders'}" %></li>
+              <li><a>Customers</a></li>
+              <li><a>Orders</a></li>
             </ul>
             <p class="menu-label">
               Settings

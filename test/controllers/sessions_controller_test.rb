@@ -99,7 +99,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
 
     assert new_user.reload.phone_verified?
     assert is_logged_in?
-    assert_redirected_to admin_path
+    assert_redirected_to admin_root_path
   end
 
   test "xhr request should update user phone_verified once otp is good" do
@@ -116,7 +116,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert new_user.reload.phone_verified?
     assert_equal "text/javascript", @response.content_type
     assert is_logged_in?
-    assert_match admin_path, @response.body
+    assert_match admin_root_path, @response.body
   end
 
   test "destroy logs out the user by deleteing from session" do
