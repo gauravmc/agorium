@@ -98,7 +98,12 @@
 
   <div class="field">
     <div class="control">
-    <%= f.submit 'Create product', class: 'button is-primary is-medium is-fullwidth', data: { "disable-with": "Creating product..." } %>
+      <%= f.button 'Create product', class: 'button is-primary is-medium is-fullwidth', data: {
+        disable_with: 'Create product',
+        controller: 'submit',
+        action: 'submit#process',
+        target: 'submit.button'
+      } %>
     </div>
   </div>
 <% end %>

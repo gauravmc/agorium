@@ -28,7 +28,12 @@
 
   <div class="field">
     <div class="control">
-      <%= f.submit 'Create my account', class: 'button is-primary is-medium is-fullwidth', data: { "disable-with": "Creating account..." } %>
+      <%= f.button 'Create my account', class: 'button is-primary is-medium is-fullwidth', data: {
+        disable_with: 'Create my account',
+        controller: 'submit',
+        action: 'submit#process',
+        target: 'submit.button'
+      } %>
     </div>
   </div>
 <% end %>

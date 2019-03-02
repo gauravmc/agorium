@@ -14,7 +14,12 @@
 
   <div class="field">
     <div class="control">
-      <%= f.submit 'Log in with OTP', class: 'button is-primary is-medium is-fullwidth', data: { "disable-with": "Sending OTP..." } %>
+      <%= f.button 'Log in with OTP', class: 'button is-primary is-medium is-fullwidth', data: {
+        disable_with: 'Log in with OTP',
+        controller: 'submit',
+        action: 'submit#process',
+        target: 'submit.button'
+      } %>
     </div>
   </div>
 <% end %>

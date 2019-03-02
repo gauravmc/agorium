@@ -10,7 +10,12 @@
     </div>
 
     <div class="control">
-      <%= f.submit 'Subscribe', class: 'button is-info is-medium', data: { "disable-with": "Subscribing..." } %>
+      <%= f.button 'Subscribe', class: 'button is-info is-medium', data: {
+        disable_with: 'Subscribe',
+        controller: 'submit',
+        action: 'submit#process',
+        target: 'submit.button'
+      } %>
     </div>
   </div>
 <% end%>
