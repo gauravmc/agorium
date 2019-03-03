@@ -55,14 +55,14 @@
               <i class="fa fa-tags"></i>
               <p>Products</p>
             <% end %>
-            <a class="navbar-item is-expanded is-block has-text-centered">
+            <%= link_to admin_orders_path, class: "navbar-item is-expanded is-block has-text-centered #{'is-active' if controller_name == 'orders'}" do %>
               <i class="fa fa-shopping-basket"></i>
               <p>Orders</p>
-            </a>
-            <a class="navbar-item is-expanded is-block has-text-centered">
+            <% end %>
+            <%= link_to admin_settings_path, class: "navbar-item is-expanded is-block has-text-centered #{'is-active' if controller_name == 'settings'}" do %>
               <i class="fa fa-cog"></i>
               <p>Settings</p>
-            </a>
+            <% end %>
           </div>
         </nav>
 
@@ -80,11 +80,11 @@
                 <span>Products</span>
               <% end %>
             </li>
-            <li>
-              <a>
+            <li class="<%= 'is-active' if controller_name == 'orders' %>">
+              <%= link_to admin_orders_path do %>
                 <span class="icon is-small"><i class="fa fa-shopping-basket" aria-hidden="true"></i></span>
                 <span>Orders</span>
-              </a>
+              <% end %>
             </li>
             <li>
               <a>
@@ -98,11 +98,11 @@
                 <span>Payments</span>
               </a>
             </li>
-            <li>
-              <a>
-                <span class="icon is-small"><i class="fa fa-cog" aria-hidden="true"></i></span>
+            <li class="<%= 'is-active' if controller_name == 'settings' %>">
+              <%= link_to admin_settings_path do %>
+                <span class="icon is-small"><i class="fa fa-tags" aria-hidden="true"></i></span>
                 <span>Settings</span>
-              </a>
+              <% end %>
             </li>
           </ul>
         </div>
