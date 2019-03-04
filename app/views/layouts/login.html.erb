@@ -3,9 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Agorium - <%= yield(:title) %></title>
+    <title><%= page_title(yield(:title)) %></title>
+    <meta name='description' content='<%= yield(:meta_description) %>' />
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
+    <%= render 'shared/social_meta_tags' %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= render 'layouts/google_analytics' %>
