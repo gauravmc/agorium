@@ -1,5 +1,5 @@
-<%= form_with(model: subscriber, url: subscribers_path, id: 'subscriptionForm') do |f| %>
-  <div class="field is-grouped">
+<%= form_with(model: subscriber, url: subscribers_path, id: formId) do |f| %>
+  <div class="field has-addons">
     <div class="control is-expanded">
       <%= f.email_field :email, class: "input is-medium #{'is-danger' if subscriber.errors.any?}", placeholder: 'Email address' %>
       <% if subscriber.errors.any? %>
@@ -8,6 +8,8 @@
         <% end %>
       <% end %>
     </div>
+
+    <%= f.hidden_field :form_id, value: formId %>
 
     <div class="control">
       <%= f.button 'Subscribe', class: 'button is-info is-medium', data: {

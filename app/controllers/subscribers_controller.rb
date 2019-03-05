@@ -1,6 +1,7 @@
 class SubscribersController < ApplicationController
   def create
     @subscriber = Subscriber.new(subscriber_params)
+    @formId = params[:subscriber][:form_id]
 
     respond_to do |format|
       if @subscriber.save

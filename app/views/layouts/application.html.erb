@@ -19,45 +19,44 @@
   </head>
 
   <body>
-    <nav class="navbar has-shadow is-spaced" role="navigation" aria-label="main navigation" data-controller="visibility">
-      <div class="navbar-brand">
-        <%= link_to(root_path, class: 'navbar-item') do %>
-          <%= image_tag('A_logo_tiny.png', alt: 'Agorium: Free, open source, & decentralized ecommerce marketplace', width: 28, height: 28) %>
-          <%= image_tag('agorium_black_small.png', width: 110, style: 'margin-left: 5px !important') %>
-        <% end %>
+    <nav class="navbar is-spaced" role="navigation" aria-label="main navigation" data-controller="visibility">
+      <div class="container">
+        <div class="navbar-brand">
+          <%= link_to(root_path, class: 'navbar-item') do %>
+            <%= image_tag('A_logo_tiny.png', alt: 'Agorium: Free, open source, & decentralized ecommerce marketplace', width: 40, style: 'max-height: 2.5rem;') %>
+            <%= image_tag('agorium_black_small.png', width: 150, style: 'margin-left: 10px !important') %>
+          <% end %>
 
-        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-action="visibility#toggle" data-target="visibility.section">
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
+          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-action="visibility#toggle" data-target="visibility.section">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
 
-      <div class="navbar-menu" data-target="visibility.section">
-        <div class="navbar-end">
-          <%= mail_to('gaurav@agorium.io', 'Contact', class: 'navbar-item') %>
-          <div class="navbar-item">
-            <div class="buttons">
-              <% if logged_in? %>
-                <%= link_to('Seller admin', admin_root_path, class: 'button') %>
-              <% else %>
-                <%= link_to(signup_path, class: 'button is-primary') do %>
-                  <strong>Start selling</strong>
+        <div class="navbar-menu" data-target="visibility.section">
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="buttons">
+                <% if logged_in? %>
+                  <%= link_to('Seller admin', admin_root_path, class: 'button') %>
+                <% else %>
+                  <%= link_to(signup_path, class: 'button is-primary') do %>
+                    <strong>Start selling</strong>
+                  <% end %>
+                  <%= link_to('Log in', login_path, class: 'button') %>
                 <% end %>
-                <%= link_to('Log in', login_path, class: 'button') %>
-              <% end %>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </nav>
 
-    <section class="section">
-      <div class="container">
-        <%= render 'shared/flash' %>
-        <%= yield %>
-      </div>
-    </section>
+    <main class="container">
+      <%= render 'shared/flash' %>
+      <%= yield %>
+    </main>
 
     <footer class="footer">
       <div class="content has-text-centered">

@@ -1,16 +1,34 @@
 <% provide(:meta_description, 'Agorium is a decentralized, zero-commission, no-fee ecommerce marketplace designed for small retailers in India.') %>
 
-<div class="content">
-  <p class="title is-1">
-    A home for the retail merchants of India
-  </p>
-  <p class="subtitle is-4 has-text-grey">
-  Agorium is a decentralized, zero-commission, no-subscription-fee marketplace designed for small retailers in India. Traditional ecommerce marketplaces today gobble up most of the value they create – in the form of margins, customer relationship, and data – making small sellers 'second-class citizens' in the process. It really doesn't have to be this way. Agorium is focused on flipping this model over its head. We've managed to design an open platform model that provides most of the value to the retailers themselves, and we're currently working hard on building it well. We're calling it Agorium because this concept is built upon the core value of <i><%= link_to 'Agora markets', 'https://en.wikipedia.org/wiki/Agora' %></i> of the ancient Greek city-states, viz. giving the power to sell freely to the small businesses. <%= link_to 'Sign up', signup_path, class: 'has-text-primary' %> to become an early user.
-  </p>
-</div>
+<section class="section is-paddingless-mobile-only">
+  <div class="columns is-vcentered">
+    <div class="column is-7">
+      <div class="content">
+        <p class="title is-1">
+          Sell your products. Own your data. Pay no commission. Trade freely.
+        </p>
+        <p class="subtitle is-4 has-text-grey">
+          Agorium is a decentralized, zero-commission, no-fee ecommerce marketplace designed for small retailers in India. <%= link_to 'Sign up', signup_path, class: 'has-text-primary' %> to start selling your products now.
+        </p>
+      </div>
+    </div>
 
-<section class="section is-medium">
-  <div class="container content">
+    <div class="column is-1">
+
+    </div>
+
+    <div class="column is-4">
+      <p class="title">Stay up to date</p>
+      <p class="subtitle is-5">Enter your email to get occasional updates from us, including when we launch.</p>
+      <%= render 'subscribers/form', subscriber: Subscriber.new, formId: 'subscriptionFormTop' %>
+    </div>
+  </div>
+</section>
+
+<hr />
+
+<section class="section">
+  <div class="content">
     <div class="columns has-text-centered">
       <div class="column">
         <span class="icon is-large has-text-info">
@@ -43,8 +61,27 @@
   </div>
 </section>
 
+<hr />
+
 <section class="section">
-  <div class="container content">
+  <div class="columns is-centered">
+    <div class="column is-four-fifths">
+      <div class="content">
+        <p class="title is-3 has-text-centered">
+          Why we started Agorium
+        </p>
+        <p class="subtitle is-4 has-text-grey">
+          Traditional ecommerce marketplaces today gobble up most of the value they create – in the form of margins, customer relationship, and data – making small sellers 'second-class citizens' in the process. It really doesn't have to be this way. Agorium is focused on flipping this model over its head. We've managed to design an open platform model that provides most of the value to the retailers themselves, taking only a tiny amount in return. We're calling it Agorium because this concept is built upon the core value of <i><%= link_to 'Agora markets', 'https://en.wikipedia.org/wiki/Agora' %></i> of the ancient Greek city-states, viz. giving the power to sell freely to the small businesses.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr />
+
+<section class="section">
+  <div class="content">
     <div class="columns is-vcentered">
       <div class="column">
         <p class="title">Stay up to date</p>
@@ -52,7 +89,7 @@
       </div>
 
       <div class="column">
-        <%= render 'subscribers/form', subscriber: Subscriber.new %>
+        <%= render 'subscribers/form', subscriber: Subscriber.new, formId: 'subscriptionFormBottom' %>
       </div>
     </div>
   </div>
