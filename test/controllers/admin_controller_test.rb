@@ -11,4 +11,11 @@ class AdminControllerTest < ActionDispatch::IntegrationTest
     get admin_root_url
     assert_redirected_to admin_products_path
   end
+
+  test "redirects a new user to brands#new page to finish account setup" do
+    user = User.create!(name: 'Garr', phone: '9604884000')
+    log_in_as user
+    get admin_root_url
+    assert_redirected_to new_admin_brand_path
+  end
 end

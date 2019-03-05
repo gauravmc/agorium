@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :products
+    resource :brand, only: [:new, :create]
     resources :dashboard, only: [:index]
     resources :orders, only: [:index]
     resources :settings, only: [:index]

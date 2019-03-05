@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= page_title('Agorium - Seller Admin', yield(:title)) %></title>
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= render 'layouts/google_analytics' %>
+    <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= favicon_link_tag 'favicon.ico' %>
+  </head>
+  <body>
+    <section class="hero is-fullheight">
+      <div class="hero-head" style="padding: 1.0rem;">
+        <nav class="level is-mobile" role="navigation" aria-label="main navigation">
+          <div class="level-left">
+            <div class="level-item has-text-centered">
+              <%= link_to(root_path) do %>
+                <%= image_tag('A_logo_small.png', alt: 'Agorium: Free, open source, & decentralized ecommerce marketplace', width: 42, height: 42) %>
+              <% end %>
+            </div>
+          </div>
+
+          <p class="level-item has-text-centered is-hidden-touch">
+            <%= image_tag('agorium_black_tiny.png', style: 'height: 30px;') %>
+          </p>
+
+          <div class="level-right">
+            <p class="level-item">
+              <%= yield(:navigation_action) %>
+            </p>
+          </div>
+        </nav>
+      </div>
+
+      <div class="hero-body is-block" style="padding-top: 2.0rem; padding-bottom: 5.0rem;">
+        <div class="container">
+          <%= render 'shared/flash' %>
+          <%= yield %>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

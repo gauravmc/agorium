@@ -1,0 +1,75 @@
+<%= form_with(model: @brand, url: admin_brand_path, data: { controller: 'submit', target: 'submit.form' }) do |f| %>
+  <div class="field">
+    <%= f.label 'Brand name', class: 'label' %>
+    <div class="control">
+      <%= f.text_field :name, class: "input is-medium #{'is-danger' if @brand.errors[:name].any?}", placeholder: "Name of your business" %>
+    </div>
+    <% if @brand.errors[:name].any? %>
+      <% @brand.errors[:name].each do |message| %>
+        <p class="help is-danger">Brand name <%= message %></p>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label 'Username', class: 'label' %>
+    <div class="control">
+      <%= f.text_field :username, class: "input is-medium #{'is-danger' if @brand.errors[:username].any?}", placeholder: "Pick a username that is easy to remember" %>
+    </div>
+    <% if @brand.errors[:username].any? %>
+      <% @brand.errors[:username].each do |message| %>
+        <p class="help is-danger">Username <%= message %></p>
+      <% end %>
+    <% else %>
+      <p class="help">Your brand's username will show up in the links you share</p>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Your brand's story", class: 'label' %>
+    <div class="control">
+      <%= f.text_area :story, class: "textarea is-medium #{'is-danger' if @brand.errors[:story].any?}", placeholder: "Tell us a little about the story of why you started this business. A good story is really helpful in setting your business apart.", rows: 4 %>
+    </div>
+    <% if @brand.errors[:story].any? %>
+      <% @brand.errors[:story].each do |message| %>
+        <p class="help is-danger">Story <%= message %></p>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label 'City (or Town)', class: 'label' %>
+    <div class="control">
+      <%= f.text_field :city, class: "input is-medium #{'is-danger' if @brand.errors[:city].any?}", placeholder: "Name of your city/town" %>
+    </div>
+    <% if @brand.errors[:city].any? %>
+      <% @brand.errors[:city].each do |message| %>
+        <p class="help is-danger">City name <%= message %></p>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label 'State', class: 'label' %>
+    <div class="control">
+      <div class="select is-medium <%= 'is-danger' if @brand.errors[:state].any? %>">
+        <%= f.select :state, options_for_state_select %>
+      </div>
+    </div>
+    <% if @brand.errors[:state].any? %>
+      <% @brand.errors[:state].each do |message| %>
+        <p class="help is-danger">State name <%= message %></p>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <div class="control">
+      <%= f.button 'Finish setup', class: 'button is-primary is-medium is-fullwidth', data: {
+        disable_with: 'Finish setup',
+        action: 'submit#process',
+        target: 'submit.button'
+      } %>
+    </div>
+  </div>
+<% end %>
