@@ -2,7 +2,7 @@
 
 cards_and_more:
   name: Cards & More
-  username: cards.and.more
+  handle: cards-more
   story: I started Cards & More out of boredom.
   city: Ahmednagar
   state: Maharashtra
@@ -10,7 +10,7 @@ cards_and_more:
 
 maple_skin:
   name: Maple Skin
-  username: maple_skin
+  handle: maple-skin
   story: I started Maple Skin because I was tired of mass manufactured that didn't solve the problem of skin dryness.
   city: Bengaluru
   state: Karnataka

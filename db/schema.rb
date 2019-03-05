@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_05_072513) do
+ActiveRecord::Schema.define(version: 2019_03_05_184444) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,15 +38,15 @@ ActiveRecord::Schema.define(version: 2019_03_05_072513) do
 
   create_table "brands", force: :cascade do |t|
     t.string "name", limit: 255, null: false
-    t.string "username", limit: 42, null: false
     t.text "story"
     t.string "city", null: false
     t.string "state", null: false
     t.bigint "owner_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "handle", limit: 255
+    t.index ["handle"], name: "index_brands_on_handle", unique: true
     t.index ["owner_id"], name: "index_brands_on_owner_id", unique: true
-    t.index ["username"], name: "index_brands_on_username", unique: true
   end
 
   create_table "products", force: :cascade do |t|

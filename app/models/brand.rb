@@ -38,15 +38,10 @@ class Brand < ApplicationRecord
     'West Bengal'
   ]
 
-  before_validation :lowercase_username
+  after_save :update_handle
   before_save :capitalize_city
 
   validates :name, presence: true, length: { maximum: 255 }
-  USERNAME_REGEX = /\A[\w.]+\z/i
-  validates :username, length: { maximum: 42 },
-    format: { with: USERNAME_REGEX, message: "should only have letters, numbers, underscores, and dots" },
-    uniqueness: true
-
   validates :city, format: { with: /\A[a-zA-Z]+\z/i, message: "should only contain letters" }
   validates :state, inclusion: { in: INDIAN_STATES, message: "is not a valid Indian state" }
   validates_uniqueness_of :owner, message: "has already created a brand"
@@ -55,8 +50,15 @@ class Brand < ApplicationRecord
 
   private
 
-  def lowercase_username
-    self.username = username.downcase if username_changed?
+  def update_handle
+    if saved_change_to_name? or saved_change_to_handle?
+      update_column(:handle, generate_handle)
+    end
+  end
+
+  def generate_handle
+    handle = name.parameterize
+    Brand.exists?(handle: handle) ? "#{handle}-#{id}" : handle
   end
 
   def capitalize_city

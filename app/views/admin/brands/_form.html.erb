@@ -12,20 +12,6 @@
   </div>
 
   <div class="field">
-    <%= f.label 'Username', class: 'label' %>
-    <div class="control">
-      <%= f.text_field :username, class: "input is-medium #{'is-danger' if @brand.errors[:username].any?}", placeholder: "Pick a username that is easy to remember" %>
-    </div>
-    <% if @brand.errors[:username].any? %>
-      <% @brand.errors[:username].each do |message| %>
-        <p class="help is-danger">Username <%= message %></p>
-      <% end %>
-    <% else %>
-      <p class="help">Your brand's username will show up in the links you share</p>
-    <% end %>
-  </div>
-
-  <div class="field">
     <%= f.label "Your brand's story", class: 'label' %>
     <div class="control">
       <%= f.text_area :story, class: "textarea is-medium #{'is-danger' if @brand.errors[:story].any?}", placeholder: "Tell us a little about the story of why you started this business. A good story is really helpful in setting your business apart.", rows: 4 %>

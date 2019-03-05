@@ -26,7 +26,7 @@ class Admin::BrandsController < AdminController
   private
 
   def brand_params
-    params.require(:brand).permit(:username, :name, :story, :city, :state)
+    params.require(:brand).permit(:name, :story, :city, :state)
   end
 
   def check_if_brand_exists

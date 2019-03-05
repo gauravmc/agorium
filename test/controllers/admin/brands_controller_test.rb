@@ -68,7 +68,6 @@ class Admin
       {
         name: 'New Brand',
         story: "Our brand's story is awesome.",
-        username: 'new_brand',
         city: 'Mumbai',
         state: 'Maharashtra'
       }
