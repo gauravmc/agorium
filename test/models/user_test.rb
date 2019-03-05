@@ -94,4 +94,11 @@ class UserTest < ActiveSupport::TestCase
     assert user.products.any?
     assert_equal 3, user.products.count
   end
+
+  test "products should get destroyed if the User is" do
+    assert_difference 'Product.count', -3 do
+      user = users(:dibs)
+      assert user.destroy
+    end
+  end
 end

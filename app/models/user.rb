@@ -5,7 +5,7 @@ class User < ApplicationRecord
   validates :phone, format: { with: /\A\d{10}\z/, message: "should be a 10-digit number" }
   validates :phone, uniqueness: true
 
-  has_many :products, foreign_key: :owner_id
+  has_many :products, foreign_key: :owner_id, dependent: :destroy
 
   def phone_successfully_verified!
     update_attribute(:phone_verified, true)
