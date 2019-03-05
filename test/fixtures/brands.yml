@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+cards_and_more:
+  name: Cards & More
+  username: cards.and.more
+  story: I started Cards & More out of boredom.
+  city: Ahmednagar
+  state: Maharashtra
+  owner: shawn
+
+maple_skin:
+  name: Maple Skin
+  username: maple_skin
+  story: I started Maple Skin because I was tired of mass manufactured that didn't solve the problem of skin dryness.
+  city: Bengaluru
+  state: Karnataka
+  owner: dibs

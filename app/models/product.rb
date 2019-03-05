@@ -1,6 +1,9 @@
 class Product < ApplicationRecord
   PHOTOS_CONTENT_TYPE = 'image/jpeg'
 
+  before_validation :set_handle
+  before_create :set_published_at
+
   validates :name, presence: true, length: { maximum: 255 }
   validates :description, presence: true
   validates :price, numericality: {
@@ -16,10 +19,6 @@ class Product < ApplicationRecord
   validate :presence_and_type_of_attached_photos
 
   belongs_to :owner, class_name: 'User'
-
-  before_validation :set_handle
-  before_create :set_published_at
-
   has_many_attached :photos
 
   private
