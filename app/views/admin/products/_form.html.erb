@@ -1,4 +1,4 @@
-<%= form_with(model: @product, url: admin_products_path) do |f| %>
+<%= form_with(model: @product, url: admin_products_path, data: { controller: 'submit', target: 'submit.form' }) do |f| %>
   <div class="field">
     <%= f.label 'Name', class: 'label' %>
     <div class="control">
@@ -100,7 +100,6 @@
     <div class="control">
       <%= f.button 'Create product', class: 'button is-primary is-medium is-fullwidth', data: {
         disable_with: 'Create product',
-        controller: 'submit',
         action: 'submit#process',
         target: 'submit.button'
       } %>

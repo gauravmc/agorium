@@ -1,4 +1,4 @@
-<%= form_with(model: subscriber, url: subscribers_path, id: formId) do |f| %>
+<%= form_with(model: subscriber, url: subscribers_path, id: formId, data: { controller: 'submit', target: 'submit.form' }) do |f| %>
   <div class="field has-addons">
     <div class="control is-expanded">
       <%= f.email_field :email, class: "input is-medium #{'is-danger' if subscriber.errors.any?}", placeholder: 'Email address' %>
@@ -14,7 +14,6 @@
     <div class="control">
       <%= f.button 'Subscribe', class: 'button is-info is-medium', data: {
         disable_with: 'Subscribe',
-        controller: 'submit',
         action: 'submit#process',
         target: 'submit.button'
       } %>

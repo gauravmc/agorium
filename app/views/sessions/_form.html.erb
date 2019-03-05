@@ -1,4 +1,4 @@
-<%= form_with(model: @session_form, scope: :session, url: login_path) do |f| %>
+<%= form_with(model: @session_form, scope: :session, url: login_path, data: { controller: 'submit', target: 'submit.form' }) do |f| %>
   <div class="field">
     <div class="control">
       <%= f.phone_field :phone, class: "input is-medium #{'is-danger' if @session_form.errors.any?}", placeholder: 'Your mobile number' %>
@@ -16,7 +16,6 @@
     <div class="control">
       <%= f.button 'Log in with OTP', class: 'button is-primary is-medium is-fullwidth', data: {
         disable_with: 'Log in with OTP',
-        controller: 'submit',
         action: 'submit#process',
         target: 'submit.button'
       } %>
