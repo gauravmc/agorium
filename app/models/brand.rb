@@ -44,7 +44,8 @@ class Brand < ApplicationRecord
   validates :name, presence: true, length: { maximum: 255 }
   USERNAME_REGEX = /\A[\w.]+\z/i
   validates :username, length: { maximum: 42 },
-    format: { with: USERNAME_REGEX, message: "should only have letters, numbers, underscores, and dots" }
+    format: { with: USERNAME_REGEX, message: "should only have letters, numbers, underscores, and dots" },
+    uniqueness: true
 
   validates :city, format: { with: /\A[a-zA-Z]+\z/i, message: "should only contain letters" }
   validates :state, inclusion: { in: INDIAN_STATES, message: "is not a valid Indian state" }

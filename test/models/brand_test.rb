@@ -45,6 +45,17 @@ class BrandTest < ActiveSupport::TestCase
     assert_equal "a___...b", @brand.username
   end
 
+  test "username must be unique" do
+    user = users(:dibs)
+    user.brand.destroy
+
+    brand = user.build_brand(new_brand_params)
+    brand.username = brands(:cards_and_more).username
+
+    refute brand.save
+    assert_equal ["Username has already been taken"], brand.errors.full_messages
+  end
+
   test "city should only contain alphabets" do
     @brand.city = "123"
     refute @brand.save
