@@ -3,7 +3,7 @@ require 'test_helper'
 class ProductTest < ActiveSupport::TestCase
   setup do
     @product = products(:summer_butter)
-    @user = users(:dibs)
+    @brand = brands(:maple_skin)
     attach_product_fixtures_photos
   end
 
@@ -86,17 +86,17 @@ class ProductTest < ActiveSupport::TestCase
     assert_equal "summer-butter", @product.handle
   end
 
-  test "handle must be unique for given user" do
+  test "handle must be unique for given brand" do
     product = new_product
-    product.name = @user.products.first.name
+    product.name = @brand.products.first.name
 
     refute product.save
     assert_equal ["Handle has already been taken"], product.errors.full_messages
   end
 
-  test "different users can have duplicate handle" do
+  test "different brands can have same product handles" do
     product = new_product
-    product.name = users(:shawn).products.first.name
+    product.name = brands(:cards_and_more).products.first.name
 
     assert product.save
     assert_equal 'wedding-card', product.handle
@@ -150,7 +150,7 @@ class ProductTest < ActiveSupport::TestCase
     assert_equal 24.42, product.cost.to_f
     assert_equal 42, product.inventory
     assert product.published_at.present?
-    assert_equal @user.id, product.owner.id
+    assert_equal @brand.id, product.owner.id
     assert product.photos.attached?
     assert_equal 'cool_product.jpeg', product.photos.first.filename.to_s
   end
@@ -165,7 +165,7 @@ class ProductTest < ActiveSupport::TestCase
       cost: 24.42,
       inventory: 42,
       photos: [Rack::Test::UploadedFile.new(file_fixture('cool_product.jpeg'))],
-      owner: @user
+      owner: @brand
     )
   end
 end

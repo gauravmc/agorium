@@ -2,15 +2,15 @@ class Admin::ProductsController < AdminController
   before_action :set_product, only: [:destroy]
 
   def index
-    @products = current_user.products.with_attached_photos
+    @products = current_brand.products.with_attached_photos
   end
 
   def new
-    @product = current_user.products.new
+    @product = current_brand.products.new
   end
 
   def create
-    @product = current_user.products.new(product_params)
+    @product = current_brand.products.new(product_params)
 
     respond_to do |format|
       if @product.save
@@ -36,7 +36,7 @@ class Admin::ProductsController < AdminController
   private
 
   def set_product
-    @product = current_user.products.find(params[:id])
+    @product = current_brand.products.find(params[:id])
   end
 
   def product_params

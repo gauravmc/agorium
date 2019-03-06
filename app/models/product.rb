@@ -18,7 +18,7 @@ class Product < ApplicationRecord
   validates :handle, uniqueness: { scope: :owner_id }
   validate :presence_and_type_of_attached_photos
 
-  belongs_to :owner, class_name: 'User'
+  belongs_to :owner, class_name: 'Brand'
   has_many_attached :photos
 
   private

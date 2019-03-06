@@ -8,7 +8,7 @@ wedding_card:
   handle: wedding-card
   published_at: 2019-03-20 04:42:11
   inventory: 42
-  owner: shawn
+  owner: cards_and_more
 
 summer_butter:
   name: Summer Butter
@@ -18,7 +18,7 @@ summer_butter:
   handle: summer-butter
   published_at: 2019-03-01 01:49:11
   inventory: 20
-  owner: dibs
+  owner: maple_skin
 
 fire_balm:
   name: Fire Butter
@@ -28,7 +28,7 @@ fire_balm:
   handle: fire-balm
   published_at: 2019-01-01 01:49:11
   inventory: 30
-  owner: dibs
+  owner: maple_skin
 
 charcoal_soap:
   name: Charcoal Soap
@@ -38,4 +38,4 @@ charcoal_soap:
   handle: charcoal-soap
   published_at: 2018-03-01 01:49:11
   inventory: 12
-  owner: dibs
+  owner: maple_skin

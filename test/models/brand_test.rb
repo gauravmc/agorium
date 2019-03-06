@@ -94,6 +94,19 @@ class BrandTest < ActiveSupport::TestCase
     assert_equal user, brand.owner
   end
 
+  test "brand has many products" do
+    brand = brands(:maple_skin)
+    assert brand.products.any?
+    assert_equal 3, brand.products.count
+  end
+
+  test "products should get destroyed if the Brand is" do
+    assert_difference 'Product.count', -3 do
+      brand = brands(:maple_skin)
+      assert brand.destroy
+    end
+  end
+
   private
 
   def new_brand_params

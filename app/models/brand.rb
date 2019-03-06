@@ -47,6 +47,7 @@ class Brand < ApplicationRecord
   validates_uniqueness_of :owner, message: "has already created a brand"
 
   belongs_to :owner, class_name: 'User'
+  has_many :products, foreign_key: :owner_id, dependent: :destroy
 
   private
 

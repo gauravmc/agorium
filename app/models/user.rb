@@ -6,7 +6,6 @@ class User < ApplicationRecord
   validates :phone, uniqueness: true
 
   has_one :brand, foreign_key: :owner_id, dependent: :destroy
-  has_many :products, foreign_key: :owner_id, dependent: :destroy
 
   def phone_successfully_verified!
     update_attribute(:phone_verified, true)
