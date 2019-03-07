@@ -25,4 +25,6 @@ Rails.application.routes.draw do
     resources :orders, only: [:index]
     resources :settings, only: [:index]
   end
+
+  get '/:handle', to: 'storefront#show', as: :storefront
 end
