@@ -1,0 +1,16 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+summer_butter_line_item:
+  product: summer_butter
+  cart: maple_cart
+  quantity: 3
+
+fire_balm_line_item:
+  product: fire_balm
+  cart: maple_cart
+  quantity: 1
+
+wedding_card_line_item:
+  product: wedding_card
+  cart: cards_cart
+  quantity: 42

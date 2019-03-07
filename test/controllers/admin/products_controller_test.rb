@@ -70,6 +70,7 @@ class Admin
     end
 
     test "destroy removes the product from the database" do
+      Cart.destroy_all
       product = @brand.products.first
 
       assert_difference('@brand.products.count', -1) do

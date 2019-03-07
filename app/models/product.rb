@@ -20,6 +20,7 @@ class Product < ApplicationRecord
 
   belongs_to :owner, class_name: 'Brand'
   has_many_attached :photos
+  has_many :line_items
 
   private
 

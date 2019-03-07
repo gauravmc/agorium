@@ -1,6 +1,7 @@
 class StorefrontController < ApplicationController
   layout 'storefront'
-  before_action :set_brand, only: [:show]
+
+  before_action :set_brand
 
   def show
     @products = @brand.products.shuffle

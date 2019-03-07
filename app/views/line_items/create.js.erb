@@ -1,0 +1,2 @@
+document.querySelector('#<%= "addToCartForm#{@product.id}" %>').outerHTML = "<%= j render 'storefront/add_to_cart_form', product: @product, brand: @brand %>";
+document.querySelector('#cartLink').outerHTML = "<%= j render 'storefront/cart_link' %>";

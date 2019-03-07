@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :subscribers, only: [:create] do
     get :verification
   end
+  resources :line_items, only: [:create]
 
   get '/admin', to: 'admin#index', as: :admin_root
 

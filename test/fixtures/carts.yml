@@ -1,0 +1,7 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+maple_cart:
+  brand: maple_skin
+
+cards_cart:
+  brand: cards_and_more

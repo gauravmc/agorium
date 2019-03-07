@@ -32,7 +32,7 @@ class BrandTest < ActiveSupport::TestCase
 
   test "handle only gets if in it if basic parameterized one is taken" do
     user = users(:dibs)
-    user.brand.destroy
+    destroy_brand(user.brand)
 
     brand = user.build_brand(new_brand_params)
     brand.name = brands(:cards_and_more).name
@@ -81,7 +81,7 @@ class BrandTest < ActiveSupport::TestCase
 
   test "brand attributes have correct values after a valid creation" do
     user = users(:dibs)
-    user.brand.destroy
+    destroy_brand(user.brand)
 
     brand = user.build_brand(new_brand_params)
 
@@ -103,7 +103,7 @@ class BrandTest < ActiveSupport::TestCase
   test "products should get destroyed if the Brand is" do
     assert_difference 'Product.count', -3 do
       brand = brands(:maple_skin)
-      assert brand.destroy
+      assert destroy_brand(brand)
     end
   end
 
@@ -116,5 +116,10 @@ class BrandTest < ActiveSupport::TestCase
       city: 'Mumbai',
       state: 'Maharashtra'
     }
+  end
+
+  def destroy_brand(brand)
+    Cart.destroy_all
+    brand.destroy
   end
 end
