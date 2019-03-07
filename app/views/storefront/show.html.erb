@@ -5,25 +5,48 @@
   <p class="subtitle">Brand tagline</p>
 </div>
 
-<div class="tabs">
+<div class="tabs is-hidden-tablet">
   <ul>
     <li class="<%= 'is-active' if controller_name == 'storefront' %>">
       <%= link_to storefront_path(@brand.handle) do %>
-        <span class="icon is-small"><i class="fas fa-tags" aria-hidden="true"></i></span>
+        <span class="icon"><i class="fas fa-tags" aria-hidden="true"></i></span>
         <span>Products</span>
       <% end %>
     </li>
     <li>
       <a>
-        <span class="icon is-small"><i class="fas fa-info" aria-hidden="true"></i></span>
+        <span class="icon"><i class="fas fa-info" aria-hidden="true"></i></span>
         <span>About us</span>
       </a>
     </li>
-    <li style="margin-left: auto;">
+    <li class="<%= 'is-active' if controller_name == 'cart' %>" style="margin-left: auto;">
+      <%= link_to cart_path do %>
+        <span class="icon"><i class="fas fa-shopping-cart" aria-hidden="true"></i></span>
+        <span><%= @cart.line_items.count %></span>
+      <% end %>
+    </li>
+  </ul>
+</div>
+
+<div class="tabs is-medium is-hidden-mobile">
+  <ul>
+    <li class="<%= 'is-active' if controller_name == 'storefront' %>">
+      <%= link_to storefront_path(@brand.handle) do %>
+        <span class="icon"><i class="fas fa-tags" aria-hidden="true"></i></span>
+        <span>Products</span>
+      <% end %>
+    </li>
+    <li>
       <a>
-        <span class="icon is-small"><i class="fas fa-shopping-cart" aria-hidden="true"></i></span>
-        <span>0 Cart</span>
+        <span class="icon"><i class="fas fa-info" aria-hidden="true"></i></span>
+        <span>About us</span>
       </a>
+    </li>
+    <li class="<%= 'is-active' if controller_name == 'cart' %>" style="margin-left: auto;">
+      <%= link_to cart_path do %>
+        <span class="icon"><i class="fas fa-shopping-cart" aria-hidden="true"></i></span>
+        <span><%= @cart.line_items.count %></span>
+      <% end %>
     </li>
   </ul>
 </div>
@@ -42,9 +65,9 @@
           <p><%= product.description.truncate(100) %></p>
         </article>
         <div class="tile is-child">
-          <a class="button is-primary is-outlined">
+          <a class="button is-primary is-medium is-outlined">
             <span class="icon">
-              <i class="fas fa-cart-arrow-down"></i>
+              <i class="fas fa-cart-plus"></i>
             </span>
             <span>Add to cart</span>
           </a>
