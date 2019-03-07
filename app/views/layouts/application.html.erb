@@ -11,7 +11,7 @@
 
     <%= render 'shared/social_meta_tags' %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= render 'layouts/google_analytics' %>
     <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -23,8 +23,8 @@
       <div class="container">
         <div class="navbar-brand">
           <%= link_to(root_path, class: 'navbar-item') do %>
-            <%= image_tag('A_logo_tiny.png', alt: 'Agorium: Free, open source, & decentralized ecommerce marketplace', width: 40, style: 'max-height: 2.5rem;') %>
-            <%= image_tag('agorium_black_small.png', width: 150, style: 'margin-left: 10px !important') %>
+            <%= image_tag('agorium_logo_small.png', alt: 'Agorium: Free, open source, & decentralized ecommerce marketplace', width: 40, style: 'max-height: 2.5rem;') %>
+            <%= image_tag('agorium_font_black_small.png', width: 150, style: 'margin-left: 12px !important') %>
           <% end %>
 
           <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-action="visibility#toggle" data-target="visibility.section">
