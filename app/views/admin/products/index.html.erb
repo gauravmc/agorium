@@ -19,10 +19,10 @@
       <% @products.each do |product| %>
         <tr>
           <td><%= image_tag product.photos.sample.variant(resize: "100x100") %></td>
-          <td class="is-size-5" align="center" valign="center"><%= product.name %></td>
+          <td class="is-size-5"><%= product.name %></td>
           <td class="is-size-5"><%= product.inventory %></td>
           <td class="is-hidden-mobile is-size-5"><%= number_to_currency(product.price, unit: '₹', format: '%u %n') %></td>
-          <td class="is-size-5">
+          <td class="is-size-7">
             <%= link_to admin_product_path(product), class: 'has-text-dark', data: { confirm: "Are you sure you want to remove #{product.name}?" }, method: :delete, remote: true do %>
               <span class="icon is-small"><i class="fas fa-trash-alt"></i></span>
             <% end %>
