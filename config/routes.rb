@@ -28,4 +28,5 @@ Rails.application.routes.draw do
   end
 
   get '/:handle', to: 'storefront#show', as: :storefront
+  get '/:handle/cart', to: 'cart#show', as: :cart
 end
