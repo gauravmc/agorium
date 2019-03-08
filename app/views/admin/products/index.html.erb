@@ -1,7 +1,7 @@
 <% provide(:title, 'Your Products') %>
 
 <% content_for :navigation_action do %>
-  <%= link_to 'Add a product', new_admin_product_path, class: 'button is-medium is-primary' %>
+  <%= link_to 'Add a product', new_admin_product_path, class: 'button is-primary' %>
 <% end %>
 
 <% if @products.any? %>
@@ -18,9 +18,9 @@
     <tbody>
       <% @products.each do |product| %>
         <tr>
-          <td><%= image_tag product.photos.sample.variant(resize: "100x100") %></td>
-          <td class="is-size-5"><%= product.name %></td>
-          <td class="is-size-5"><%= product.inventory %></td>
+          <td><%= image_tag product.photos.sample.variant(resize: "128x128") %></td>
+          <td class="is-size-5 is-size-6-mobile"><%= product.name %></td>
+          <td class="is-size-5 is-size-6-mobile"><%= product.inventory %></td>
           <td class="is-hidden-mobile is-size-5"><%= number_to_currency(product.price, unit: '₹', format: '%u %n') %></td>
           <td class="is-size-7">
             <%= link_to admin_product_path(product), class: 'has-text-dark', data: { confirm: "Are you sure you want to remove #{product.name}?" }, method: :delete, remote: true do %>
