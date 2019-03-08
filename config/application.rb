@@ -23,5 +23,6 @@ module Agorium
     end
 
     config.eager_load_paths << Rails.root.join('lib')
+    config.active_record.schema_format = :sql
   end
 end

@@ -119,6 +119,7 @@ class BrandTest < ActiveSupport::TestCase
   end
 
   def destroy_brand(brand)
+    Order.destroy_all
     Cart.destroy_all
     brand.destroy
   end
