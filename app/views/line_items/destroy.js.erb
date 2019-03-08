@@ -1,0 +1,3 @@
+document.querySelector('#<%= "lineItemRow#{@line_item.id}" %>').remove();
+document.querySelector('#cartLink').outerHTML = "<%= j render 'storefront/cart_link' %>";
+document.querySelector('#cartSubtotal').outerHTML = "<%= j render 'cart/subtotal' %>";

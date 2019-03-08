@@ -1,7 +1,9 @@
 class LineItemsController < ApplicationController
   include CartHelper
+  include StorefrontHelper
 
-  before_action :set_brand, :set_product
+  before_action :set_brand
+  before_action :set_product, only: [:create]
 
   def create
     @line_item = current_cart.add_product(@product)
@@ -16,11 +18,20 @@ class LineItemsController < ApplicationController
     end
   end
 
-  private
+  def destroy
+    @line_item = current_cart.line_items.find(params[:id])
 
-  def set_brand
-    @brand = Brand.find(line_item_params[:brand_id])
+    respond_to do |format|
+      if @line_item.destroy
+        format.js { render :destroy }
+      else
+        flash[:danger] = "Product could not be removed from cart. Please try again."
+        format.js { redirect_to cart_path(@brand.handle) }
+      end
+    end
   end
+
+  private
 
   def set_product
     @product = @brand.products.find(line_item_params[:product_id])

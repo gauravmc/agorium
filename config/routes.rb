@@ -15,7 +15,6 @@ Rails.application.routes.draw do
   resources :subscribers, only: [:create] do
     get :verification
   end
-  resources :line_items, only: [:create]
 
   get '/admin', to: 'admin#index', as: :admin_root
 
@@ -28,5 +27,7 @@ Rails.application.routes.draw do
   end
 
   get '/:handle', to: 'storefront#show', as: :storefront
+  post '/:handle/line_items', to: 'line_items#create', as: :line_items
+  delete '/:handle/line_item/:id', to: 'line_items#destroy', as: :line_item
   get '/:handle/cart', to: 'cart#show', as: :cart
 end
