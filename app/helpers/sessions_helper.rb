@@ -16,10 +16,6 @@ module SessionsHelper
     end
   end
 
-  def current_brand
-    current_user.brand
-  end
-
   def logged_in?
     !current_user.nil?
   end

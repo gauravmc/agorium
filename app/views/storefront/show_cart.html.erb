@@ -1,4 +1,4 @@
-<% provide(:title, "#{@brand.name} - Cart") %>
+<% provide(:title, "#{current_brand.name} - Cart") %>
 
 
 <% if @line_items.any? %>
@@ -25,7 +25,7 @@
           <td class="is-size-5 is-size-6-mobile has-text-centered"><%= item.quantity %></td>
           <td class="is-size-5 is-hidden-mobile has-text-centered"><%= number_to_currency(item.total_price, unit: '₹', format: '%u %n') %></td>
           <td class="is-size-7">
-            <%= link_to line_item_path(@brand.handle, item), class: 'has-text-grey-dark', data: { confirm: "Are you sure you want to remove #{item.product.name}?" }, method: :delete, remote: true do %>
+            <%= link_to line_item_path(current_brand.handle, item), class: 'has-text-grey-dark', data: { confirm: "Are you sure you want to remove #{item.product.name}?" }, method: :delete, remote: true do %>
               <span class="icon is-small"><i class="fas fa-trash-alt"></i></span>
             <% end %>
           </td>
@@ -41,7 +41,7 @@
     </div>
     <div class="column is-narrow">
       <div class="content">
-        <%= render 'cart/subtotal' %>
+        <%= render 'cart_subtotal' %>
         <%= link_to 'Check out', nil, class: 'button is-medium is-hidden-mobile is-primary is-fullwidth' %>
         <%= link_to 'Check out', nil, class: 'button is-hidden-tablet is-primary is-fullwidth' %>
       </div>
@@ -51,7 +51,7 @@
 <% else %>
 <section class="section">
   <div class="content">
-    <h3 class="title">Your cart is empty right now. You can start adding products from <%= link_to 'here', storefront_path(@brand.handle) %>.</h3>
+    <h3 class="title">Your cart is empty right now. You can start adding products from <%= link_to 'here', storefront_path(current_brand.handle) %>.</h3>
   </div>
 </section>
 <% end%>

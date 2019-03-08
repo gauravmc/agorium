@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   end
 
   get '/:handle', to: 'storefront#show', as: :storefront
+  get '/:handle/cart', to: 'storefront#show_cart', as: :cart
   post '/:handle/line_items', to: 'line_items#create', as: :line_items
   delete '/:handle/line_item/:id', to: 'line_items#destroy', as: :line_item
-  get '/:handle/cart', to: 'cart#show', as: :cart
 end

@@ -1,4 +1,4 @@
-<% provide(:title, @brand.name) %>
+<% provide(:title, current_brand.name) %>
 
 <section class="section">
   <% @products.each_slice(3) do |slice| %>
@@ -14,7 +14,7 @@
           <p><%= product.description.truncate(100) %></p>
         </article>
         <div class="tile is-child">
-          <%= render 'add_to_cart_form', product: product, brand: @brand %>
+          <%= render 'add_to_cart_form', product: product, brand: current_brand %>
         </div>
       </div>
     <% end %>
