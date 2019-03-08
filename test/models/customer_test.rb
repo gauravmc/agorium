@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class CustomerTest < ActiveSupport::TestCase
+  setup do
+    @customer = customers(:tar)
+  end
+
   test "name must exist" do
     customer = Customer.new(phone: 9999999999)
     refute customer.save
@@ -62,5 +66,22 @@ class CustomerTest < ActiveSupport::TestCase
     customer.phone_successfully_verified!
     customer.reload
     assert customer.phone_verified?
+  end
+
+  test "address returns the most recent address added for the customer" do
+    address = addresses(:tar_address)
+    assert_equal address, @customer.address
+
+    new_address = Address.create!(
+      address_line_1: '1234, Elita,',
+      address_line_2: 'Phase 42, Jayanagar',
+      landmark: 'Near Somewhere',
+      city: 'Bengaluru',
+      state: 'Karnataka',
+      pincode: 560042,
+      customer: @customer
+    )
+
+    assert_equal new_address, @customer.reload.address
   end
 end
