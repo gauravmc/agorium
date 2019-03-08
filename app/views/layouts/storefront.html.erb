@@ -20,9 +20,7 @@
     <section class="section">
       <div class="container has-text-centered">
         <div class="content">
-          <%= link_to storefront_path(current_brand.handle) do %>
-            <h1 class="title is-1"><%= current_brand.name %></h1>
-          <% end %>
+          <h1 class="title is-1"><%= link_to current_brand.name, storefront_path(current_brand.handle), class: 'has-text-dark' %></h1>
           <p class="subtitle">Brand tagline</p>
         </div>
 
@@ -36,7 +34,7 @@
             </li>
             <li>
               <a>
-                <span class="icon"><i class="fas fa-info" aria-hidden="true"></i></span>
+                <span class="icon"><i class="fas fa-store" aria-hidden="true"></i></span>
                 <span>About us</span>
               </a>
             </li>
