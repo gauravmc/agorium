@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+vin_address:
+  address_line_1: '250, Pune Street'
+  address_line_2: Budhwar Peth
+  landmark: Near Dagdushet Temple
+  city: Pune
+  state: Maharashtra
+  pincode: 411002
+  customer: vin
+
+tar_address:
+  address_line_1: '1234, Elita, Phase 42, Jayanagar'
+  address_line_2: null
+  landmark: null
+  city: Bengaluru
+  state: Karnataka
+  pincode: 560008
+  customer: tar
