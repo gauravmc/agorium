@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+vin:
+  name: Vin
+  phone: 8373900000
+
+tar:
+  name: Tar Jad
+  phone: 9890801111
