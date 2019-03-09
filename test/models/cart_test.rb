@@ -26,4 +26,15 @@ class CartTest < ActiveSupport::TestCase
     refute line_item.persisted?
     assert_equal 1, line_item.quantity
   end
+
+  test "transfer_items_to_order sets cart_id to nil and order_id to given order" do
+    order = Order.first
+    line_item_ids = @cart.line_items.map(&:id)
+
+    @cart.transfer_items_to_order(order)
+
+    line_items = LineItem.where(id: line_item_ids)
+    assert_equal [nil, nil], line_items.map(&:cart)
+    assert_equal [order, order], line_items.map(&:order)
+  end
 end

@@ -1,6 +1,6 @@
 class Cart < ApplicationRecord
   belongs_to :brand
-  has_many :line_items, dependent: :destroy
+  has_many :line_items
 
   def add_product(product)
     if line_item = line_items.find_by(product: product)
@@ -16,5 +16,9 @@ class Cart < ApplicationRecord
 
   def subtotal
     line_items.sum(&:total_price)
+  end
+
+  def transfer_items_to_order(order)
+    line_items.update_all(cart_id: nil, order_id: order.id)
   end
 end

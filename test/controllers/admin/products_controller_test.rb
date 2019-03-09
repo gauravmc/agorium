@@ -70,6 +70,7 @@ class Admin
     end
 
     test "destroy removes the product from the database" do
+      LineItem.destroy_all
       Cart.destroy_all
       product = @brand.products.first
 

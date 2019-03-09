@@ -248,10 +248,11 @@ ALTER SEQUENCE public.customers_id_seq OWNED BY public.customers.id;
 CREATE TABLE public.line_items (
     id bigint NOT NULL,
     product_id bigint NOT NULL,
-    cart_id bigint NOT NULL,
+    cart_id bigint,
     quantity integer DEFAULT 1,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    order_id bigint
 );
 
 
@@ -668,6 +669,13 @@ CREATE INDEX index_line_items_on_cart_id ON public.line_items USING btree (cart_
 
 
 --
+-- Name: index_line_items_on_order_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_line_items_on_order_id ON public.line_items USING btree (order_id);
+
+
+--
 -- Name: index_line_items_on_product_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -730,6 +738,14 @@ ALTER TABLE ONLY public.line_items
 
 ALTER TABLE ONLY public.brands
     ADD CONSTRAINT fk_rails_25cc40a032 FOREIGN KEY (owner_id) REFERENCES public.users(id);
+
+
+--
+-- Name: line_items fk_rails_2dc2e5c22c; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.line_items
+    ADD CONSTRAINT fk_rails_2dc2e5c22c FOREIGN KEY (order_id) REFERENCES public.orders(id);
 
 
 --
@@ -809,6 +825,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20190307165836'),
 ('20190308191104'),
 ('20190308192733'),
-('20190308201616');
+('20190308201616'),
+('20190309203410');
 
 
