@@ -1,0 +1,31 @@
+<div class="columns">
+  <div class="column is-5">
+    <p class="subtitle is-4">Shipping</p>
+    <%= render 'customer_form' %>
+  </div>
+
+  <div class="column">
+    <p class="subtitle is-4">Order summary</p>
+
+    <table class="table is-hoverable" style="margin: auto;">
+      <thead>
+        <th></th>
+        <th class="has-text-centered">Quantity</th>
+        <th class="has-text-centered">Price</th>
+      </thead>
+      <tbody>
+        <% @line_items.each do |item| %>
+          <tr>
+            <td><%= image_tag item.product.photos.first.variant(resize: "96x96") %></td>
+            <td class="is-size-5 has-text-centered"><%= item.quantity %></td>
+            <td class="is-size-5 has-text-centered"><%= number_to_currency(item.total_price, unit: '₹', format: '%u %n') %></td>
+          </tr>
+        <% end %>
+        <tr>
+          <td colspan="2"><p class="subtitle">Total price:</p></td>
+          <td><p class="subtitle"><b><%= number_to_currency(current_cart.subtotal, unit: '₹', format: '%u %n') %></b></p></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -17,6 +17,8 @@ $fullhd-enabled: false;
 $control-border-width: 2px;
 $input-shadow: none;
 
+$breadcrumb-item-color: $info;
+
 @import "~bulma/bulma";
 
 .table tbody > tr > td

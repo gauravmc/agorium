@@ -1,7 +1,7 @@
 class StorefrontController < ApplicationController
   layout 'storefront'
   before_action :ensure_brand_exists
-  helper_method :current_brand, :current_cart
+  helper_method :current_brand, :current_cart, :navigation_type
 
   def show
     @products = current_brand.products.shuffle
@@ -31,5 +31,9 @@ class StorefrontController < ApplicationController
     @current_cart = Cart.create(brand: current_brand)
     session[key] = @current_cart.id
     @current_cart
+  end
+
+  def navigation_type
+    :tabs
   end
 end

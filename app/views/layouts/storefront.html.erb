@@ -20,29 +20,54 @@
     <section class="section">
       <div class="container has-text-centered">
         <div class="content">
-          <h1 class="title is-1"><%= link_to current_brand.name, storefront_path(current_brand.handle), class: 'has-text-dark' %></h1>
+          <h2 class="title is-2"><%= link_to current_brand.name, storefront_path(current_brand.handle), class: 'has-text-dark' %></h2>
           <p class="subtitle">Brand tagline</p>
         </div>
 
-        <div class="tabs">
-          <ul>
-            <li class="<%= 'is-active' if action_name == 'show' %>">
-              <%= link_to storefront_path(current_brand.handle) do %>
-                <span class="icon"><i class="fas fa-tags" aria-hidden="true"></i></span>
-                <span>Products</span>
-              <% end %>
-            </li>
-            <li>
-              <a>
-                <span class="icon"><i class="fas fa-store" aria-hidden="true"></i></span>
-                <span>About us</span>
-              </a>
-            </li>
-            <li class="<%= 'is-active' if action_name == 'show_cart' %>" style="margin-left: auto;">
-              <%= render 'storefront/cart_link' %>
-            </li>
-          </ul>
-        </div>
+        <% if navigation_type == :tabs %>
+          <div class="tabs">
+            <ul>
+              <li class="<%= 'is-active' if action_name == 'show' %>">
+                <%= link_to storefront_path(current_brand.handle) do %>
+                  <span class="icon"><i class="fas fa-tags" aria-hidden="true"></i></span>
+                  <span>Products</span>
+                <% end %>
+              </li>
+              <li>
+                <a>
+                  <span class="icon"><i class="fas fa-store" aria-hidden="true"></i></span>
+                  <span>About us</span>
+                </a>
+              </li>
+              <li class="<%= 'is-active' if action_name == 'show_cart' %>" style="margin-left: auto;">
+                <%= render 'storefront/cart_link' %>
+              </li>
+            </ul>
+          </div>
+        <% end %>
+
+        <% if navigation_type == :breadcrumb %>
+          <nav class="breadcrumb" aria-label="breadcrumbs">
+            <ul>
+              <li>
+                <%= link_to cart_path(current_brand.handle) do %>
+                  <span class="icon is-small">
+                    <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+                  </span>
+                  <span>Cart</span>
+                <% end %>
+              </li>
+              <li class="<%= 'is-active' if controller_name == 'checkout' %>">
+                <%= link_to new_checkout_path(current_brand.handle) do %>
+                  <span class="icon is-small">
+                    <i class="fas fa-cash-register" aria-hidden="true"></i>
+                  </span>
+                  <span>Checkout</span>
+                <% end %>
+              </li>
+            </ul>
+          </nav>
+        <% end %>
 
         <%= render 'shared/flash' %>
         <%= yield %>
@@ -51,7 +76,7 @@
 
     <footer class="footer">
       <div class="content has-text-centered">
-        <p>© 2019 <%= current_brand.name %> - Powered by <%= link_to 'Agorium', 'https://agorium.io' %></p>
+        <p>© 2019 <%= current_brand.name %> - Built with <%= link_to 'Agorium', 'https://agorium.io' %></p>
       </div>
     </footer>
   </body>

@@ -42,8 +42,8 @@
     <div class="column is-narrow">
       <div class="content">
         <%= render 'cart_subtotal' %>
-        <%= link_to 'Check out', nil, class: 'button is-medium is-hidden-mobile is-primary is-fullwidth' %>
-        <%= link_to 'Check out', nil, class: 'button is-hidden-tablet is-primary is-fullwidth' %>
+        <%= link_to 'Check out', new_checkout_path(current_brand.handle), class: 'button is-medium is-hidden-mobile is-primary is-fullwidth' %>
+        <%= link_to 'Check out', new_checkout_path(current_brand.handle), class: 'button is-hidden-tablet is-primary is-fullwidth' %>
       </div>
     </div>
   </div>

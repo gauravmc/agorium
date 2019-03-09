@@ -28,6 +28,8 @@ Rails.application.routes.draw do
 
   get '/:handle', to: 'storefront#show', as: :storefront
   get '/:handle/cart', to: 'storefront#show_cart', as: :cart
+  get '/:handle/checkout', to: 'checkout#new', as: :new_checkout
+  post '/:handle/checkout', to: 'checkout#create', as: :checkout
   post '/:handle/line_items', to: 'line_items#create', as: :line_items
   delete '/:handle/line_item/:id', to: 'line_items#destroy', as: :line_item
 end
