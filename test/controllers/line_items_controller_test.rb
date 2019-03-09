@@ -38,12 +38,4 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
     assert_match "querySelector('#cartLink')", @response.body
     assert_match "querySelector('#cartSubtotal')", @response.body
   end
-
-  private
-
-  def current_session_cart(brand)
-    attach_product_fixtures_photos
-    get storefront_path(brand.handle)
-    Cart.find(session["cart_id_#{brand.id}".to_sym])
-  end
 end

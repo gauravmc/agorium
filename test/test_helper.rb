@@ -65,5 +65,13 @@ end
 module ActionDispatch
   class IntegrationTest
     prepend RemoveUploadedFiles
+
+    private
+
+    def current_session_cart(brand)
+      attach_product_fixtures_photos
+      get storefront_path(brand.handle)
+      Cart.find(session["cart_id_#{brand.id}".to_sym])
+    end
   end
 end

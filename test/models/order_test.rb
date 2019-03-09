@@ -40,6 +40,12 @@ class OrderTest < ActiveSupport::TestCase
         Order.generate(customer, carts(:maple_cart))
       end
     end
+
+    order = Order.last
+
+    assert_equal 'Random dude', order.customer.name
+    assert_equal 'Maple Skin', order.brand.name
+    assert_equal 171.96, order.total_price
   end
 
   test ".generate cart line items get transferred to the order" do
