@@ -1,0 +1,12 @@
+<div id="confirmButton" class="field">
+  <div class="control">
+    <%= button_tag 'Confirm order',
+      form: 'shippingForm',
+      class: "button #{@customer.errors.present? ? 'is-danger' : 'is-primary'} is-medium",
+      data: {
+        disable_with: 'Confirm order',
+        action: 'submit#process',
+        target: 'submit.button'
+    } %>
+  </div>
+</div>

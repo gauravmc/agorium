@@ -1,13 +1,19 @@
-<div class="columns">
-  <div class="column is-5">
+<div class="columns is-desktop">
+  <div class="column">
     <p class="subtitle is-4">Shipping</p>
-    <%= render 'customer_form' %>
+    <%= render 'shipping_form' %>
+  </div>
+
+  <div class="column">
+    <p class="subtitle is-4">Payment method</p>
+
+    <%= render 'payment_form' %>
   </div>
 
   <div class="column">
     <p class="subtitle is-4">Order summary</p>
 
-    <table class="table is-hoverable" style="margin: auto;">
+    <table class="table is-hoverable">
       <thead>
         <th></th>
         <th class="has-text-centered">Quantity</th>
@@ -29,3 +35,5 @@
     </table>
   </div>
 </div>
+
+<%= render 'confirm_button' %>

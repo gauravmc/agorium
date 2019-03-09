@@ -25,12 +25,19 @@ class StorefrontController < ApplicationController
   end
 
   def current_cart
-    key = "cart_id_#{current_brand.id}".to_sym
-    @current_cart ||= Cart.find(session[key])
+    @current_cart ||= Cart.find(session[cart_key])
   rescue ActiveRecord::RecordNotFound
-    @current_cart = Cart.create(brand: current_brand)
-    session[key] = @current_cart.id
-    @current_cart
+    @current_cart = create_cart
+  end
+
+  def create_cart
+    cart = Cart.create(brand: current_brand)
+    session[cart_key] = cart.id
+    cart
+  end
+
+  def cart_key
+    "cart_id_#{current_brand.id}".to_sym
   end
 
   def navigation_type
