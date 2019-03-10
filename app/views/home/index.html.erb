@@ -13,14 +13,10 @@
       </div>
     </div>
 
-    <div class="column is-1">
-
-    </div>
-
-    <div class="column is-4">
-      <p class="title">Stay up to date</p>
-      <p class="subtitle is-5">Enter your email to get occasional updates from us, including when we launch.</p>
-      <%= render 'subscribers/form', subscriber: Subscriber.new, formId: 'subscriptionFormTop' %>
+    <div class="column is-5 is-flex" style="justify-content: center;">
+      <figure class="image">
+        <%= image_tag('illustrations/main_tiny.png', style: 'max-width: 480px;', alt: 'Illustration showing open market.') %>
+      </figure>
     </div>
   </div>
 </section>
@@ -28,30 +24,50 @@
 <hr />
 
 <section class="section">
-  <div class="content">
-    <div class="columns has-text-centered">
-      <div class="column">
-        <span class="icon is-large has-text-info">
-          <i class="fa-users fas fa-2x"></i>
-        </span>
+  <div class="columns is-vcentered">
+    <div class="column is-4 is-flex" style="justify-content: center;">
+      <figure class="image">
+        <%= image_tag('illustrations/open_customer_data_tiny.png', style: 'max-width: 300px;', alt: 'Illustration showing free communication between two people.') %>
+      </figure>
+    </div>
+    <div class="column">
+      <div class="content">
         <h3 class="title is-4 is-spaced">Open customer data</h3>
         <p class="subtitle is-5">
           Agorium does not create a wall between you and your customers. In fact we've designed specific features for you to establish long-term relationships with your buyers, just like the good old days of in-person retail.
         </p>
       </div>
-      <div class="column">
-        <span class="icon is-large has-text-success">
-          <i class="fa-money-bill fas fa-2x"></i>
-        </span>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="columns is-vcentered">
+    <div class="column">
+      <div class="content">
         <h3 class="title is-4 is-spaced">Zero-commission</h3>
         <p class="subtitle is-5">
           We don't take any cut from your sales, no matter the size of your transactions. We keep Agorium running by charging a small fee for few premium features – product photography, branding, or running marketing campaigns for your business.
         </p>
       </div>
-      <div class="column">
-        <span class="icon is-large has-text-warning">
-          <i class="fas fa-smile-beam fa-2x"></i>
-        </span>
+    </div>
+    <div class="column is-4 is-flex" style="justify-content: center;">
+      <figure class="image">
+        <%= image_tag('illustrations/zero_commission_tiny.png', style: 'max-width: 300px;', alt: 'Illustration showing businesswoman having a lot of money.') %>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="columns is-vcentered">
+    <div class="column is-4 is-flex" style="justify-content: center;">
+      <figure class="image">
+        <%= image_tag('illustrations/quick_setup_tiny.png', style: 'max-width: 300px;', alt: 'Illustration showing a slick software user interface.') %>
+      </figure>
+    </div>
+    <div class="column">
+      <div class="content">
         <h3 class="title is-4 is-spaced">Setup in minutes</h3>
         <p class="subtitle is-5">
           We put a lot of love and effort in making Agorium's interface simple, beautifully designed and fun-to-use. Our side-mission is to design software that makes our users smile. We want to make selling products online feel like a video game.
@@ -89,7 +105,7 @@
       </div>
 
       <div class="column">
-        <%= render 'subscribers/form', subscriber: Subscriber.new, formId: 'subscriptionFormBottom' %>
+        <%= render 'subscribers/form', subscriber: Subscriber.new, formId: 'subscriptionForm' %>
       </div>
     </div>
   </div>
