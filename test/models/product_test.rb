@@ -139,6 +139,14 @@ class ProductTest < ActiveSupport::TestCase
     assert_equal ["Photos must be of type image/jpeg only"], product.errors.full_messages
   end
 
+  test "is_in_stock? returns true or false based on inventory availability" do
+    assert @product.is_in_stock?
+
+    @product.update_column(:inventory, 0)
+
+    refute @product.is_in_stock?
+  end
+
   test "product attributes have correct values after a valid creation" do
     product = new_product
 

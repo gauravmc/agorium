@@ -3,6 +3,8 @@ class Cart < ApplicationRecord
   has_many :line_items
 
   def add_product(product)
+    return unless product.is_in_stock?
+
     if line_item = line_items.find_by(product: product)
       line_item.increment(:quantity)
     else

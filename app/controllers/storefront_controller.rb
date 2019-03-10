@@ -8,7 +8,7 @@ class StorefrontController < ApplicationController
   end
 
   def show_cart
-    @line_items = current_cart.line_items.preload(:product)
+    @line_items = current_cart.line_items
   end
 
   private
@@ -25,7 +25,7 @@ class StorefrontController < ApplicationController
   end
 
   def current_cart
-    @current_cart ||= Cart.find(session[cart_key])
+    @current_cart ||= Cart.includes(:line_items).find(session[cart_key])
   rescue ActiveRecord::RecordNotFound
     @current_cart = create_cart
   end

@@ -6,6 +6,7 @@ class LineItemsController < StorefrontController
 
     respond_to do |format|
       if @line_item.save
+        current_cart.line_items.reload
         format.js { render :create }
       else
         flash[:danger] = "Product could not be added to cart. Please try again."
@@ -19,6 +20,7 @@ class LineItemsController < StorefrontController
 
     respond_to do |format|
       if @line_item.destroy
+        current_cart.line_items.reload
         format.js { render :destroy }
       else
         flash[:danger] = "Product could not be removed from cart. Please try again."

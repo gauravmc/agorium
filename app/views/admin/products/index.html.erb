@@ -18,7 +18,7 @@
     <tbody>
       <% @products.each do |product| %>
         <tr>
-          <td><%= image_tag product.photos.sample.variant(resize: "128x128") %></td>
+          <td><%= image_tag product.photos.first.variant(resize: "128x128") %></td>
           <td class="is-size-5 is-size-6-mobile"><%= product.name %></td>
           <td class="is-size-5 is-size-6-mobile"><%= product.inventory %></td>
           <td class="is-hidden-mobile is-size-5"><%= number_to_currency(product.price, unit: '₹', format: '%u %n') %></td>

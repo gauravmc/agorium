@@ -22,6 +22,10 @@ class Product < ApplicationRecord
   has_many_attached :photos
   has_many :line_items
 
+  def is_in_stock?
+    inventory > 0
+  end
+
   private
 
   def presence_and_type_of_attached_photos
