@@ -1,5 +1,6 @@
 class AdminController < ApplicationController
   before_action :ensure_user_login, :ensure_account_setup_completed
+  helper_method :current_brand
 
   def index
     redirect_to admin_products_path

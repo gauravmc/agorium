@@ -1,4 +1,4 @@
-<% provide(:title, 'Your Products') %>
+<% provide(:title, 'Your products') %>
 
 <% content_for :navigation_action do %>
   <%= link_to 'Add a product', new_admin_product_path, class: 'button is-primary' %>
@@ -33,9 +33,6 @@
   </table>
 <% else %>
   <div class="content">
-    <h2 class="title">
-      Your Products
-    </h2>
     <p class="subtitle">
       Start adding some products by clicking the 'Add a product' button on the top right-hand corner!
     </p>

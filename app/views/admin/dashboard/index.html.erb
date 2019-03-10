@@ -1,8 +1,20 @@
+<% provide(:title, 'Home') %>
+
+<% content_for :navigation_action do %>
+  <%= link_to 'View your store', storefront_url(current_brand.handle), class: 'button is-primary', target: "_blank" %>
+<% end %>
+
 <div class="content">
-  <h2 class="title">
-    Dashboard
-  </h2>
   <p class="subtitle">
-    As you can see, this area is work-in-progress right now. This is where you will be able to view how your business in doing on a day-to-day basis, with stats like orders per day, visitors per week, etc. We're working on making this the most well-designed and fun-to-use interface. You're going to love it!
+    As you can see, this area is work-in-progress right now.
+  </p>
+  <p class="subtitle">
+    We have generated a sample online store for your brand though, so you might like to play around with it:
+  </p>
+  <p class="subtitle">
+    <%= link_to 'View your online store', storefront_url(current_brand.handle), class: 'is-medium is-primary', target: "_blank" %>.
+  </p>
+  <p class="subtitle">
+    Hint: it's more fun when you have a few products with some photos.
   </p>
 </div>
