@@ -62,6 +62,39 @@ class Admin
       assert_equal new_brand_params[:name], @user.brand.name
     end
 
+    test "edit renders brand edit form" do
+      log_in_as(users(:dibs))
+
+      get edit_admin_brand_url
+
+      assert_response :success
+      assert_match 'Maple Skin', @response.body
+      assert_match 'Save settings', @response.body
+    end
+
+    test "update renders errors when params are invalid" do
+      log_in_as(users(:dibs))
+
+      put admin_brand_url, params: { brand: { city: '' } }, xhr: true
+
+      assert_response :unprocessable_entity
+      assert_equal "text/javascript", @response.content_type
+      assert_match "City name should only contain letters", @response.body
+    end
+
+    test "update updates brand and redirects with success when params are valid" do
+      user = users(:dibs)
+      log_in_as(user)
+
+      put admin_brand_url, params: { brand: { name: 'Supple Skincare' } }, xhr: true
+
+      assert_response :success
+      assert_equal "text/javascript", @response.content_type
+      assert_equal "Your brand settings were successfully updated.", flash[:success]
+      assert_match admin_root_url, @response.body
+      assert_equal 'Supple Skincare', user.brand.name
+    end
+
     private
 
     def new_brand_params
