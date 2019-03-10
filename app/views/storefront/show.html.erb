@@ -6,15 +6,24 @@
     <% filler_tile_count = 3 - slice.size %>
     <% slice.each do |product| %>
       <div class="tile is-parent is-vertical">
-        <article class="tile is-child">
-          <figure class="image" style="margin-bottom: 20px !important;">
-            <%= image_tag product.photos.first.variant(resize: "480") %>
-          </figure>
-          <p class="title is-4"><%= product.name %></p>
-          <p><%= product.description.truncate(100) %></p>
-        </article>
         <div class="tile is-child">
-          <%= render 'add_to_cart_form', product: product, brand: current_brand %>
+          <article class="tile is-child">
+            <figure class="image" style="margin-bottom: 20px !important;">
+              <%= image_tag product.photos.first.variant(resize: "480") %>
+            </figure>
+            <p class="title is-4"><%= product.name %></p>
+            <p><%= product.description.truncate(100) %></p>
+          </article>
+        </div>
+        <div class="tile is-child">
+          <div class="level">
+            <div class="level-item">
+              <%= render 'add_to_cart_form', product: product, brand: current_brand %>
+            </div>
+            <div class="level-item">
+              <p class="title is-5"><%= number_to_currency(product.price, unit: '₹', format: '%u %n') %></p>
+            </div>
+          </div>
         </div>
       </div>
     <% end %>
