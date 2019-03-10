@@ -1,8 +1,33 @@
-<div class="content">
-  <h2 class="title">
-    Your Orders
-  </h2>
-  <p class="subtitle">
-    There aren't any orders to see right now, as we're currently building out the storefront area, where customers will purchase your products. You'll then be able to view orders made to your store, fulfill them, connect with your customers, etc. We're working on making this the most well-designed and fun-to-use interface. You're going to love it!
-  </p>
-</div>
+<% provide(:title, 'Your Orders') %>
+
+<% if @orders.any? %>
+  <table class="table is-hoverable is-fullwidth">
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>Customer name</th>
+        <th class="is-hidden-mobile">Quantity</th>
+        <th>Total price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <td class="is-size-5 is-size-6-mobile"><%= order.id %></td>
+          <td class="is-size-5 is-size-6-mobile"><%= order.customer.name %></td>
+          <td class="is-hidden-mobile is-size-5"><%= order.line_items.count %></td>
+          <td class="is-size-5 is-size-6-mobile" nowrap><%= number_to_currency(order.total_price, unit: '₹', format: '%u %n') %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="content">
+    <h2 class="title">
+      Your Orders
+    </h2>
+    <p class="subtitle">
+      There aren't any orders to see right now. Once you add and sell your products, you'll be able to access your orders on this screen, fulfill and ship them, contact your customers, etc.
+    </p>
+  </div>
+<% end %>

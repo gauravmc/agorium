@@ -21,7 +21,7 @@
           <td><%= image_tag product.photos.first.variant(resize: "128x128") %></td>
           <td class="is-size-5 is-size-6-mobile"><%= product.name %></td>
           <td class="is-size-5 is-size-6-mobile"><%= product.inventory %></td>
-          <td class="is-hidden-mobile is-size-5"><%= number_to_currency(product.price, unit: '₹', format: '%u %n') %></td>
+          <td class="is-hidden-mobile is-size-5" nowrap><%= number_to_currency(product.price, unit: '₹', format: '%u %n') %></td>
           <td class="is-size-7">
             <%= link_to admin_product_path(product), class: 'has-text-grey-dark', data: { confirm: "Are you sure you want to remove #{product.name}?" }, method: :delete, remote: true do %>
               <span class="icon is-small"><i class="fas fa-trash-alt"></i></span>

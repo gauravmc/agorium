@@ -8,6 +8,7 @@ class Brand < ApplicationRecord
 
   belongs_to :owner, class_name: 'User'
   has_many :products, foreign_key: :owner_id, dependent: :destroy
+  has_many :orders
 
   private
 
