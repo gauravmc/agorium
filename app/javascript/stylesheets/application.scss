@@ -21,6 +21,12 @@ $breadcrumb-item-color: $info;
 
 @import "~bulma/bulma";
 
+@media (max-width: 768px) {
+  .has-columns-reverse {
+    flex-direction: column-reverse;
+  }
+}
+
 .table tbody > tr > td
 {
   vertical-align: middle !important;
