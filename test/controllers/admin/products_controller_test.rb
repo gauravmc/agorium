@@ -16,7 +16,7 @@ class Admin
       assert_response :success
 
       products = @brand.products
-      assert_match 'Your Products', @response.body
+      assert_match 'Products', @response.body
       assert_match products.first.name, @response.body
       assert_match products.last.name, @response.body
     end
@@ -25,7 +25,7 @@ class Admin
       get new_admin_product_url
 
       assert_response :success
-      assert_match 'Add a new Product', @response.body
+      assert_match 'Add a new product', @response.body
     end
 
     test "create renders form with errors when product is invalid" do

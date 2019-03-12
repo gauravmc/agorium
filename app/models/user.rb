@@ -2,6 +2,8 @@ class User < ApplicationRecord
   extend Encryption
   include PhoneValidation
 
+  before_validation :strip_string_attributes
+
   validates :name, presence: true, length: { maximum: 255 }
 
   has_one :brand, foreign_key: :owner_id, dependent: :destroy
@@ -18,5 +20,12 @@ class User < ApplicationRecord
 
   def authenticated?(token)
     User.authenticated?(remember_digest, token)
+  end
+
+  private
+
+  def strip_string_attributes
+    self.name = name.try(:strip)
+    self.phone = phone.try(:strip)
   end
 end

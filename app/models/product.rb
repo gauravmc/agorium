@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
   PHOTOS_CONTENT_TYPE = 'image/jpeg'
 
-  before_validation :set_handle
+  before_validation :set_handle, :strip_string_attributes
   before_create :set_published_at
 
   validates :name, presence: true, length: { maximum: 255 }
@@ -46,5 +46,9 @@ class Product < ApplicationRecord
 
   def set_published_at
     self.published_at = DateTime.now.utc
+  end
+
+  def strip_string_attributes
+    self.name = name.try(:strip)
   end
 end

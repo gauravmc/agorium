@@ -18,6 +18,13 @@ class BrandTest < ActiveSupport::TestCase
     assert_equal ["Name is too long (maximum is 255 characters)"], @brand.errors.full_messages
   end
 
+  test "name is stripped before validating" do
+    @brand.name = " forty two "
+    assert @brand.save
+    assert_equal "forty two", @brand.name
+    assert_equal "forty-two", @brand.handle
+  end
+
   test "handle must be set automatically as a paramterized form of product name" do
     @brand.name = "Harley Davidson"
     assert @brand.save
@@ -63,6 +70,12 @@ class BrandTest < ActiveSupport::TestCase
 
   test "city is capitalized before saving" do
     @brand.city = "ahmednagar"
+    assert @brand.save
+    assert_equal "Ahmednagar", @brand.reload.city
+  end
+
+  test "city name is stripped before validating" do
+    @brand.city = " ahmednagar "
     assert @brand.save
     assert_equal "Ahmednagar", @brand.reload.city
   end

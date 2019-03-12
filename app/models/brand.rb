@@ -2,6 +2,7 @@ class Brand < ApplicationRecord
   include AddressValidation
 
   after_save :update_handle
+  before_validation :strip_string_attributes
 
   validates :name, presence: true, length: { maximum: 255 }
   validates_uniqueness_of :owner, message: "has already created a brand"
@@ -21,5 +22,10 @@ class Brand < ApplicationRecord
   def generate_handle
     handle = name.parameterize
     Brand.exists?(handle: handle) ? "#{handle}-#{id}" : handle
+  end
+
+  def strip_string_attributes
+    self.name = name.try(:strip)
+    self.city = city.try(:strip)
   end
 end
