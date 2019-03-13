@@ -10,7 +10,7 @@
           <div class="tile is-child">
             <article class="tile is-child">
               <figure class="image" style="margin-bottom: 20px !important;">
-                <%= image_tag product.photos.first.variant(resize: "480") %>
+                <%= image_tag product.photos.first.variant(resize: "480x480") %>
               </figure>
               <p class="title is-4"><%= product.name %></p>
               <p><%= product.description.truncate(100) %></p>
