@@ -4,7 +4,7 @@
   <%= link_to 'Add a product', new_admin_product_path, class: 'button is-primary' %>
 <% end %>
 
-<% if @products.any? %>
+<% if @products.present? %>
   <table class="table is-hoverable is-fullwidth">
     <thead>
       <tr>

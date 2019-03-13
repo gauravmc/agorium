@@ -26,7 +26,7 @@
         <% end %>
         <tr>
           <td colspan="2"><p class="subtitle">Total price:</p></td>
-          <td nowrap><p class="subtitle"><b><%= number_to_currency(current_cart.subtotal, unit: '₹', format: '%u %n') %></b></p></td>
+          <td nowrap><p class="subtitle"><b><%= number_to_currency(cart_subtotal, unit: '₹', format: '%u %n') %></b></p></td>
         </tr>
       </tbody>
     </table>

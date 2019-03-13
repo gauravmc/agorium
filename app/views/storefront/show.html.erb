@@ -1,6 +1,6 @@
 <% provide(:title, current_brand.name) %>
 
-<% if @products.any? %>
+<% if @products.present? %>
   <section class="section topmost-section">
     <% @products.each_slice(3) do |slice| %>
       <div class="tile is-ancestor">

@@ -1,7 +1,6 @@
 <% provide(:title, "#{current_brand.name} - Cart") %>
 
-
-<% if @line_items.any? %>
+<% if @line_items.present? %>
 <section class="section topmost-section has-text-left">
   <div class="content">
     <h3 class="title">Items in your cart</h3>

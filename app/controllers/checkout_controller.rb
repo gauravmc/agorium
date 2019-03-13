@@ -2,7 +2,7 @@ class CheckoutController < StorefrontController
   def new
     @customer = Customer.new
     @customer.build_address
-    @line_items = current_cart.line_items.preload(:product)
+    @line_items = current_cart.line_items.includes(product: { photos_attachments: :blob })
   end
 
   def create

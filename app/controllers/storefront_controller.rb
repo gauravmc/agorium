@@ -4,11 +4,12 @@ class StorefrontController < ApplicationController
   helper_method :current_brand, :current_cart, :navigation_type
 
   def show
-    @products = current_brand.products.shuffle
+    @products = current_brand.products.includes(photos_attachments: :blob).shuffle
+    @line_items = current_cart.line_items.includes(:product)
   end
 
   def show_cart
-    @line_items = current_cart.line_items
+    @line_items = current_cart.line_items.includes(product: { photos_attachments: :blob })
   end
 
   private
@@ -25,7 +26,7 @@ class StorefrontController < ApplicationController
   end
 
   def current_cart
-    @current_cart ||= Cart.includes(:line_items).find(session[cart_key])
+    @current_cart ||= Cart.find(session[cart_key])
   rescue ActiveRecord::RecordNotFound
     @current_cart = create_cart
   end

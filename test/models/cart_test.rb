@@ -5,11 +5,6 @@ class CartTest < ActiveSupport::TestCase
     @cart = carts(:maple_cart)
   end
 
-  test "quantity returns sum of all line_items' quantities" do
-    assert_equal 4, @cart.quantity
-    assert_equal 42, carts(:cards_cart).quantity
-  end
-
   test "add_product increments quantity in existing line_item if it exists" do
     existing_line_item = line_items(:summer_butter_line_item)
 

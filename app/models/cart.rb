@@ -12,10 +12,6 @@ class Cart < ApplicationRecord
     end
   end
 
-  def quantity
-    line_items.sum(&:quantity)
-  end
-
   def subtotal
     line_items.sum(&:total_price)
   end

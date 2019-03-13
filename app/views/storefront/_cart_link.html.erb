@@ -1,4 +1,4 @@
 <%= link_to cart_path(current_brand.handle), id: 'cartLink' do %>
   <span class="icon"><i class="fas fa-shopping-cart" aria-hidden="true"></i></span>
-  <span><%= current_cart.quantity %></span>
+  <span><%= cart_quantity %></span>
 <% end %>

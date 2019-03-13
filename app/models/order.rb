@@ -31,7 +31,7 @@ class Order < ApplicationRecord
   end
 
   def update_products_inventory
-    line_items.preload(:product).each do |line_item|
+    line_items.includes(:product).each do |line_item|
       product = line_item.product
       product.decrement(:inventory, line_item.quantity)
 
