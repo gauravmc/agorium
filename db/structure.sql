@@ -154,7 +154,8 @@ CREATE TABLE public.brands (
     owner_id bigint NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    handle character varying(255)
+    handle character varying(255),
+    tagline character varying(255)
 );
 
 
@@ -826,6 +827,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20190308191104'),
 ('20190308192733'),
 ('20190308201616'),
-('20190309203410');
+('20190309203410'),
+('20190313164925');
 
 

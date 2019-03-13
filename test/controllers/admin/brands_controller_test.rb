@@ -100,6 +100,7 @@ class Admin
     def new_brand_params
       {
         name: 'New Brand',
+        tagline: 'Just do it!',
         story: "Our brand's story is awesome.",
         city: 'Mumbai',
         state: 'Maharashtra'

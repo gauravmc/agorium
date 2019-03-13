@@ -25,6 +25,16 @@ class BrandTest < ActiveSupport::TestCase
     assert_equal "forty-two", @brand.handle
   end
 
+  test "tagline, if present, cannot be full of blanks" do
+    @brand.tagline = "         "
+    assert @brand.save
+    refute @brand.reload.tagline.present?
+
+    @brand.tagline = "Buy once, buy 42 times"
+    assert @brand.save
+    assert_equal "Buy once, buy 42 times", @brand.reload.tagline
+  end
+
   test "handle must be set automatically as a paramterized form of product name" do
     @brand.name = "Harley Davidson"
     assert @brand.save
@@ -90,6 +100,18 @@ class BrandTest < ActiveSupport::TestCase
     brand = Brand.new(new_brand_params.merge(owner: users(:dibs)))
     refute brand.save
     assert_equal ["Owner has already created a brand"], brand.errors.full_messages
+  end
+
+  test "brand logo must be of either png or jpeg format" do
+    @brand.logo.attach(io: file_fixture('funny.gif').open, filename: 'funny.gif')
+    refute @brand.save
+    assert_equal ["Logo must be either a png or jpeg type image"], @brand.errors.full_messages
+
+    @brand.logo.attach(io: file_fixture('avatar.png').open, filename: 'avatar.png')
+    assert @brand.save
+
+    @brand.logo.attach(io: file_fixture('cool_product.jpeg').open, filename: 'cool_product.jpeg')
+    assert @brand.save
   end
 
   test "brand attributes have correct values after a valid creation" do
