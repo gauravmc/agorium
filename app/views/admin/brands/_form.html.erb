@@ -24,6 +24,38 @@
   </div>
 
   <div class="field">
+    <% if @brand.errors[:logo].none? && @brand.logo.attached? %>
+      <figure class="image is-128x128">
+        <%= image_tag @brand.logo.variant(resize: "128x128") %>
+      </figure>
+    <% end %>
+
+    <div class="file is-medium" data-controller="upload">
+      <label class="file-label">
+        <%= f.file_field :logo, accept: 'image/png, image/jpeg', class: 'file-input', data: { action: 'upload#updateFilenames' } %>
+        <span class="file-cta">
+          <span class="file-icon">
+            <i class="fas fa-upload"></i>
+          </span>
+          <span class="file-label">
+            <%= @brand.logo.attached? ? 'Replace logo' : 'Upload brand logo' %>
+          </span>
+        </span>
+        <span data-target="upload.filenames">
+          <% if @brand.logo.attached? %>
+            <span class="file-name"><%=  @brand.logo.filename%></span>
+          <% end %>
+        </span>
+      </label>
+    </div>
+    <% if @brand.errors[:logo].any? %>
+      <% @brand.errors[:logo].each do |message| %>
+        <p class="help is-danger">Logo <%= message %></p>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="field">
     <%= f.label "Your brand's story", class: 'label' %>
     <div class="control">
       <%= f.text_area :story, class: "textarea is-medium #{'is-danger' if @brand.errors[:story].any?}", placeholder: "Tell us a little about the story of why you started this business. A good story is really helpful in setting your business apart.", rows: 4 %>

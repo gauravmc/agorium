@@ -101,6 +101,7 @@ class Admin
       {
         name: 'New Brand',
         tagline: 'Just do it!',
+        logo: fixture_file_upload(file_fixture('avatar.png')),
         story: "Our brand's story is awesome.",
         city: 'Mumbai',
         state: 'Maharashtra'
