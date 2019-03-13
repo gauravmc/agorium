@@ -19,6 +19,8 @@ $input-shadow: none;
 
 $breadcrumb-item-color: $info;
 
+$variable-columns: false;
+
 @import "~bulma/bulma";
 
 @media (max-width: 768px) {
