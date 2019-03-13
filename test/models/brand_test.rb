@@ -114,6 +114,12 @@ class BrandTest < ActiveSupport::TestCase
     assert @brand.save
   end
 
+  test "brand logo cannot be bigger than 5 mb" do
+    @brand.logo.attach(io: file_fixture('large_photo.jpg').open, filename: 'large_photo.jpg')
+    refute @brand.save
+    assert_equal ["Logo size should not be bigger than 5 MB"], @brand.errors.full_messages
+  end
+
   test "brand attributes have correct values after a valid creation" do
     user = users(:dibs)
     destroy_brand(user.brand)

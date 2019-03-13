@@ -9,6 +9,7 @@ class Brand < ApplicationRecord
   validates :name, presence: true, length: { maximum: 255 }
   validates_uniqueness_of :owner, message: "has already created a brand"
   validate :type_of_attached_logo
+  validate :size_of_attached_logo
 
   belongs_to :owner, class_name: 'User'
   has_many :products, foreign_key: :owner_id, dependent: :destroy
@@ -31,6 +32,12 @@ class Brand < ApplicationRecord
   def type_of_attached_logo
     if logo.attached? && !logo.content_type.in?(LOGO_CONTENT_TYPES)
       errors.add(:logo, "must be either a png or jpeg type image")
+    end
+  end
+
+  def size_of_attached_logo
+    if logo.attached? && logo.byte_size > 5.megabytes
+      errors.add(:logo, "size should not be bigger than 5 MB")
     end
   end
 

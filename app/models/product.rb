@@ -33,6 +33,10 @@ class Product < ApplicationRecord
       if photos.any? { |photo| photo.content_type != PHOTOS_CONTENT_TYPE }
         errors.add(:photos, "must be of type #{PHOTOS_CONTENT_TYPE} only")
       end
+
+      if photos.any? { |photo| photo.byte_size > 5.megabytes }
+        errors.add(:photos, "should not be bigger than 5 MB")
+      end
     else
       errors.add(:photos, "must be present. Add at least one photo")
     end

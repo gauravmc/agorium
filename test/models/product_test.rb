@@ -139,6 +139,13 @@ class ProductTest < ActiveSupport::TestCase
     assert_equal ["Photos must be of type image/jpeg only"], product.errors.full_messages
   end
 
+  test "product photo must not be bigger than 5 MB" do
+    product = products(:wedding_card)
+    product.photos.attach(io: file_fixture('large_photo.jpg').open, filename: 'large_photo.jpg')
+    refute product.save
+    assert_equal ["Photos should not be bigger than 5 MB"], product.errors.full_messages
+  end
+
   test "is_in_stock? returns true or false based on inventory availability" do
     assert @product.is_in_stock?
 
