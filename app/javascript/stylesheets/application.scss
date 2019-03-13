@@ -1,5 +1,9 @@
 @charset "utf-8";
 
+$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+
 @import url('https://fonts.googleapis.com/css?family=Ubuntu:400,500,700');
 
 $beige-light: #F2E8CD;
