@@ -30,7 +30,7 @@
       </figure>
     <% end %>
 
-    <div class="file is-medium" data-controller="upload">
+    <div class="file is-boxed" data-controller="upload">
       <label class="file-label">
         <%= f.file_field :logo, accept: 'image/png, image/jpeg', class: 'file-input', data: { action: 'upload#updateFilenames' } %>
         <span class="file-cta">

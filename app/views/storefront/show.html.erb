@@ -1,7 +1,7 @@
 <% provide(:title, current_brand.name) %>
 
 <% if @products.any? %>
-  <section class="section">
+  <section class="section topmost-section">
     <% @products.each_slice(3) do |slice| %>
       <div class="tile is-ancestor">
       <% filler_tile_count = 3 - slice.size %>
@@ -39,7 +39,7 @@
     <% end %>
   </section>
 <% else %>
-  <section class="section">
+  <section class="section topmost-section">
     <div class="content">
       <h3 class="title">This store is empty right now, but it will soon have some nice products for sale. Please check back again!</h3>
     </div>

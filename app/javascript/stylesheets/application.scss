@@ -23,7 +23,17 @@ $variable-columns: false;
 
 @import "~bulma/bulma";
 
+@media (max-width: 1024px) {
+  .topmost-section {
+    padding-top: 2rem;
+  }
+}
+
 @media (max-width: 768px) {
+  .topmost-section {
+    padding-top: 1rem;
+  }
+
   .has-columns-reverse {
     flex-direction: column-reverse;
   }

@@ -2,7 +2,7 @@
 
 
 <% if @line_items.any? %>
-<section class="section has-text-left">
+<section class="section topmost-section has-text-left">
   <div class="content">
     <h3 class="title">Items in your cart</h3>
   </div>
@@ -49,7 +49,7 @@
   </div>
 </section>
 <% else %>
-<section class="section">
+<section class="section topmost-section">
   <div class="content">
     <h3 class="title">Your cart is empty right now. You can start adding products from <%= link_to 'here', storefront_path(current_brand.handle) %>.</h3>
   </div>
